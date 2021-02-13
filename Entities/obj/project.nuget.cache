@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "fJDA9rjhuOKH5A4LsjZodWrHQnHyjVjrYH25hTk9rvSB3rrgKq5Uy6WEE8SWfGD96SJBMiuFTo3oFLot0p0xvw==",
+  "dgSpecHash": "UkfSk1TE0Nv4zE4vdhleekAPQQuEj3wVqxsDADUCwJR9cpTtTXnpuqp0DlK0d6lH32dQY2Faq5W++Rni2DQj7Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\CEREN\\Desktop\\ReCapProject-main\\Entities\\Entities.csproj",
+  "projectFilePath": "C:\\Users\\CEREN\\Desktop\\kodlama.io\\Proje\\ReCapProject\\Entities\\Entities.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\CEREN\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\CEREN\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.1\\microsoft.bcl.hashcode.1.1.1.nupkg.sha512",

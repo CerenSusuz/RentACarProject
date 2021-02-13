@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2RaSRrrVYrwdngBAFfX+h9RpnjuipCzHD5TcBx53PJ7eqc0AIQTlW6oIP51L2L+95jmO+mO3mnhezzRMzthkJw==",
+  "dgSpecHash": "9jYrbKg3Xte1TbmPjekGEuelvW3FafsbmQ7GNi0fiZ4hJk83KzX4OWfvf+UAOkZ082qvzeqWvWUgeNYwqth3SQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\CEREN\\Desktop\\ReCapProject-main\\Core\\Core.csproj",
+  "projectFilePath": "C:\\Users\\CEREN\\Desktop\\kodlama.io\\Proje\\ReCapProject\\Core\\Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\CEREN\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\CEREN\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.1\\microsoft.bcl.hashcode.1.1.1.nupkg.sha512",

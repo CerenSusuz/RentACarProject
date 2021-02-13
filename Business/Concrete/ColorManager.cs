@@ -1,4 +1,6 @@
-﻿using DataAccess.Abstract;
+﻿using Core.Utilities.Results.Abstract;
+using Core.Utilities.Results.Concrete;
+using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -13,29 +15,30 @@ namespace Business.Concrete
         {
             _colorDAL = colorDAL;
         }
-        public void Add(Color color)
+
+        public IResult Add(Color color)
         {
             _colorDAL.Add(color);
+            return new SuccessResult();
         }
-
-        public void Delete(Color color)
+        public IResult Delete(Color color)
         {
             _colorDAL.Delete(color);
+            return new SuccessResult();
         }
-
-        public List<Color> GetColors()
-        {
-            return _colorDAL.GetAll();
-        }
-
-        public Color GetById(Color color)
-        {
-            return _colorDAL.Get(c => c.Id == color.Id);
-        }
-
-        public void Update(Color color)
+        public IResult Update(Color color)
         {
             _colorDAL.Update(color);
+            return new SuccessResult();
         }
+        public IDataResult<List<Color>> GetColors()
+        {
+            return new SuccessDataResult<List<Color>>(_colorDAL.GetAll());
+        }
+        public IDataResult<Color> GetById(Color color)
+        {
+            return new SuccessDataResult<Color>(_colorDAL.Get(c => c.Id == color.Id));
+        }
+
     }
 }

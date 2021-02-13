@@ -10,7 +10,7 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            CarManager carManager = new CarManager(new EFCarDAL());
+            CarManager carManager = new CarManager(new EFCarDal());
             BrandManager brandManager = new BrandManager(new EFBrandDAL());
             ColorManager colorManager = new ColorManager(new EFColorDAL());
 
@@ -24,7 +24,7 @@ namespace ConsoleUI
 
         private static void GetColors(ColorManager colorManager)
         {
-            foreach (Color color in colorManager.GetColors())
+            foreach (Color color in colorManager.GetColors().Data)
             {
                 Console.WriteLine(color.Name);
 
@@ -46,7 +46,7 @@ namespace ConsoleUI
 
         private static void GetDailyPrice(CarManager carManager)
         {
-            foreach (var car in carManager.GetByDailyPrice(750, 1000))
+            foreach (var car in carManager.GetByDailyPrice(750, 1000).Data)
             {
                 Console.WriteLine(car.Description);
             }

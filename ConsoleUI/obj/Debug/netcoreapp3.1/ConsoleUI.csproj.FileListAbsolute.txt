@@ -120,3 +120,5 @@ C:\Users\CEREN\Desktop\ReCapProject-main\ConsoleUI\obj\Debug\netcoreapp3.1\Conso
 C:\Users\CEREN\Desktop\ReCapProject-main\ConsoleUI\obj\Debug\netcoreapp3.1\ConsoleUI.genruntimeconfig.cache
 C:\Users\CEREN\Desktop\ReCapProject-main\ConsoleUI\bin\Debug\netcoreapp3.1\Core.dll
 C:\Users\CEREN\Desktop\ReCapProject-main\ConsoleUI\bin\Debug\netcoreapp3.1\Core.pdb
+C:\Users\CEREN\Desktop\kodlama.io\Proje\ReCapProject\ConsoleUI\bin\Debug\netcoreapp3.1\Core.dll
+C:\Users\CEREN\Desktop\kodlama.io\Proje\ReCapProject\ConsoleUI\bin\Debug\netcoreapp3.1\Core.pdb

@@ -5731,11 +5731,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\CEREN\\Desktop\\ReCapProject-main\\ConsoleUI\\ConsoleUI.csproj",
+      "projectUniqueName": "C:\\Users\\CEREN\\Desktop\\kodlama.io\\Proje\\ReCapProject\\ConsoleUI\\ConsoleUI.csproj",
       "projectName": "ConsoleUI",
-      "projectPath": "C:\\Users\\CEREN\\Desktop\\ReCapProject-main\\ConsoleUI\\ConsoleUI.csproj",
+      "projectPath": "C:\\Users\\CEREN\\Desktop\\kodlama.io\\Proje\\ReCapProject\\ConsoleUI\\ConsoleUI.csproj",
       "packagesPath": "C:\\Users\\CEREN\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\CEREN\\Desktop\\ReCapProject-main\\ConsoleUI\\obj\\",
+      "outputPath": "C:\\Users\\CEREN\\Desktop\\kodlama.io\\Proje\\ReCapProject\\ConsoleUI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\CEREN\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5752,14 +5752,14 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\CEREN\\Desktop\\ReCapProject-main\\Business\\Business.csproj": {
-              "projectPath": "C:\\Users\\CEREN\\Desktop\\ReCapProject-main\\Business\\Business.csproj"
+            "C:\\Users\\CEREN\\Desktop\\kodlama.io\\Proje\\ReCapProject\\Business\\Business.csproj": {
+              "projectPath": "C:\\Users\\CEREN\\Desktop\\kodlama.io\\Proje\\ReCapProject\\Business\\Business.csproj"
             },
-            "C:\\Users\\CEREN\\Desktop\\ReCapProject-main\\DataAccess\\DataAccess.csproj": {
-              "projectPath": "C:\\Users\\CEREN\\Desktop\\ReCapProject-main\\DataAccess\\DataAccess.csproj"
+            "C:\\Users\\CEREN\\Desktop\\kodlama.io\\Proje\\ReCapProject\\DataAccess\\DataAccess.csproj": {
+              "projectPath": "C:\\Users\\CEREN\\Desktop\\kodlama.io\\Proje\\ReCapProject\\DataAccess\\DataAccess.csproj"
             },
-            "C:\\Users\\CEREN\\Desktop\\ReCapProject-main\\Entities\\Entities.csproj": {
-              "projectPath": "C:\\Users\\CEREN\\Desktop\\ReCapProject-main\\Entities\\Entities.csproj"
+            "C:\\Users\\CEREN\\Desktop\\kodlama.io\\Proje\\ReCapProject\\Entities\\Entities.csproj": {
+              "projectPath": "C:\\Users\\CEREN\\Desktop\\kodlama.io\\Proje\\ReCapProject\\Entities\\Entities.csproj"
             }
           }
         }
@@ -5788,7 +5788,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
       }
     }
   }

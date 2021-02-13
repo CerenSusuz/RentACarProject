@@ -19,3 +19,6 @@ C:\Users\CEREN\Desktop\ReCapProject-main\Entities\bin\Debug\netstandard2.0\Entit
 C:\Users\CEREN\Desktop\ReCapProject-main\Entities\bin\Debug\netstandard2.0\Core.dll
 C:\Users\CEREN\Desktop\ReCapProject-main\Entities\bin\Debug\netstandard2.0\Core.pdb
 C:\Users\CEREN\Desktop\ReCapProject-main\Entities\obj\Debug\netstandard2.0\Entities.csproj.CopyComplete
+C:\Users\CEREN\Desktop\kodlama.io\Proje\ReCapProject\Entities\bin\Debug\netstandard2.0\Core.dll
+C:\Users\CEREN\Desktop\kodlama.io\Proje\ReCapProject\Entities\bin\Debug\netstandard2.0\Core.pdb
+C:\Users\CEREN\Desktop\kodlama.io\Proje\ReCapProject\Entities\obj\Debug\netstandard2.0\Entities.csproj.CopyComplete

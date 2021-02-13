@@ -11,7 +11,7 @@ using System.Text;
 
 namespace DataAccess.Concrete.Entity_Framework
 {
-    public class EfCarDal : EFEntityRepositoryBase<Car, ReCapDbContext>, ICarDAL
+    public class EFCarDal : EFEntityRepositoryBase<Car, ReCapDbContext>, ICarDAL
     {
         public List<CarDetailDto> GetCarDetailDtos(Expression<Func<Car, bool>> filter = null)
         {

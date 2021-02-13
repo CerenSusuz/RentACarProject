@@ -6223,11 +6223,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\CEREN\\Desktop\\ReCapProject-main\\Entities\\Entities.csproj",
+      "projectUniqueName": "C:\\Users\\CEREN\\Desktop\\kodlama.io\\Proje\\ReCapProject\\Entities\\Entities.csproj",
       "projectName": "Entities",
-      "projectPath": "C:\\Users\\CEREN\\Desktop\\ReCapProject-main\\Entities\\Entities.csproj",
+      "projectPath": "C:\\Users\\CEREN\\Desktop\\kodlama.io\\Proje\\ReCapProject\\Entities\\Entities.csproj",
       "packagesPath": "C:\\Users\\CEREN\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\CEREN\\Desktop\\ReCapProject-main\\Entities\\obj\\",
+      "outputPath": "C:\\Users\\CEREN\\Desktop\\kodlama.io\\Proje\\ReCapProject\\Entities\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\CEREN\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6244,8 +6244,8 @@
         "netstandard2.0": {
           "targetAlias": "netstandard2.0",
           "projectReferences": {
-            "C:\\Users\\CEREN\\Desktop\\ReCapProject-main\\Core\\Core.csproj": {
-              "projectPath": "C:\\Users\\CEREN\\Desktop\\ReCapProject-main\\Core\\Core.csproj"
+            "C:\\Users\\CEREN\\Desktop\\kodlama.io\\Proje\\ReCapProject\\Core\\Core.csproj": {
+              "projectPath": "C:\\Users\\CEREN\\Desktop\\kodlama.io\\Proje\\ReCapProject\\Core\\Core.csproj"
             }
           }
         }
@@ -6277,7 +6277,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
       }
     }
   }

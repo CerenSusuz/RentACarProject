@@ -28,3 +28,5 @@ C:\Users\CEREN\Desktop\ReCapProject-main\Business\obj\Debug\netstandard2.0\Busin
 C:\Users\CEREN\Desktop\ReCapProject-main\Business\obj\Debug\netstandard2.0\Business.pdb
 C:\Users\CEREN\Desktop\ReCapProject-main\Business\bin\Debug\netstandard2.0\Core.dll
 C:\Users\CEREN\Desktop\ReCapProject-main\Business\bin\Debug\netstandard2.0\Core.pdb
+C:\Users\CEREN\Desktop\kodlama.io\Proje\ReCapProject\Business\bin\Debug\netstandard2.0\Core.dll
+C:\Users\CEREN\Desktop\kodlama.io\Proje\ReCapProject\Business\bin\Debug\netstandard2.0\Core.pdb

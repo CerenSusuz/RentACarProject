@@ -16,3 +16,5 @@ C:\Users\CEREN\Desktop\ReCapProject-main\DataAccess\obj\Debug\netstandard2.0\Dat
 C:\Users\CEREN\Desktop\ReCapProject-main\DataAccess\obj\Debug\netstandard2.0\DataAccess.csproj.CoreCompileInputs.cache
 C:\Users\CEREN\Desktop\ReCapProject-main\DataAccess\obj\Debug\netstandard2.0\DataAccess.dll
 C:\Users\CEREN\Desktop\ReCapProject-main\DataAccess\obj\Debug\netstandard2.0\DataAccess.pdb
+C:\Users\CEREN\Desktop\kodlama.io\Proje\ReCapProject\DataAccess\bin\Debug\netstandard2.0\Core.dll
+C:\Users\CEREN\Desktop\kodlama.io\Proje\ReCapProject\DataAccess\bin\Debug\netstandard2.0\Core.pdb
