@@ -11,5 +11,6 @@ namespace Business.Constants
         public static string Updated = "Update process OK";
         public static string Listed = "List process OK";
         public static string MaintenanceTime = "System is under maintenance";
+        public static string FailedRental = "The car has not yet been delivered";
     }
 }

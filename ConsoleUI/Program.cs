@@ -10,9 +10,12 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            CarManager carManager = new CarManager(new EFCarDal());
+            CarManager carManager = new CarManager(new EFCarDAL());
             BrandManager brandManager = new BrandManager(new EFBrandDAL());
             ColorManager colorManager = new ColorManager(new EFColorDAL());
+            CustomerManager customerManager = new CustomerManager(new EFCustomerDAL());
+            UserManager userManager = new UserManager(new EFUserDAL());
+            RentalManager rentalManager = new RentalManager(new EFRentalDAL());
 
             // AddCar(carManager);
 
@@ -20,6 +23,57 @@ namespace ConsoleUI
 
             // GetColors(colorManager);
 
+            // GetUserEmail(userManager);
+
+            // AddUserManuel(userManager);
+
+            // TakeInfoAndAddUser(userManager);
+        }
+
+        private static void TakeInfoAndAddUser(UserManager userManager)
+        {
+            Console.Write("FirstName: ");
+            string FirstName = Console.ReadLine();
+
+            Console.Write("LastName: ");
+            string Lastname = Console.ReadLine();
+
+            Console.Write("Email: ");
+            string Email = Console.ReadLine();
+
+            Console.Write("Password: ");
+            string Password = Console.ReadLine();
+
+            User user = new User
+            {
+                FirstName = FirstName,
+                LastName = Lastname,
+                Email = Email,
+                Password = Password
+
+            };
+            userManager.Add(user);
+        }
+
+        private static void AddUserManuel(UserManager userManager)
+        {
+            User user = new User
+            {
+                Email = "aybikesusuz@gmail.com",
+                FirstName = "Aybike",
+                LastName = "Susuz",
+                Password = "aybike123"
+            };
+
+            userManager.Add(user);
+        }
+
+        private static void GetUserEmail(UserManager userManager)
+        {
+            foreach (User user in userManager.GetUsers().Data)
+            {
+                Console.WriteLine(user.Email);
+            }
         }
 
         private static void GetColors(ColorManager colorManager)
@@ -51,5 +105,6 @@ namespace ConsoleUI
                 Console.WriteLine(car.Description);
             }
         }
+
     }
 }
