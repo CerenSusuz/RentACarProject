@@ -1,4 +1,5 @@
-﻿using Business.Constants;
+﻿using Business.Abstract;
+using Business.Constants;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -9,7 +10,7 @@ using System.Text;
 
 namespace Business.Concrete
 {
-    public class RentalManager
+    public class RentalManager : IRentalService
     {
         IRentalDAL _rentalDAL;
         public RentalManager(IRentalDAL rentalDAL)
@@ -40,9 +41,9 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Rental>>(_rentalDAL.GetAll());
         }
-        public IDataResult<Rental> GetById(Rental rental)
+        public IDataResult<Rental> GetById(int id)
         {
-            return new SuccessDataResult<Rental>(_rentalDAL.Get(r => r.Id == rental.Id));
+            return new SuccessDataResult<Rental>(_rentalDAL.Get(r => r.Id == id));
         }
     }
 } 

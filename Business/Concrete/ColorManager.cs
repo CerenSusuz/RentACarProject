@@ -1,4 +1,5 @@
-﻿using Core.Utilities.Results.Abstract;
+﻿using Business.Abstract;
+using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -8,7 +9,7 @@ using System.Text;
 
 namespace Business.Concrete
 {
-    public class ColorManager
+    public class ColorManager : IColorService
     {
         IColorDAL _colorDAL;
         public ColorManager(IColorDAL colorDAL)
@@ -35,9 +36,9 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Color>>(_colorDAL.GetAll());
         }
-        public IDataResult<Color> GetById(Color color)
+        public IDataResult<Color> GetById(int id)
         {
-            return new SuccessDataResult<Color>(_colorDAL.Get(c => c.Id == color.Id));
+            return new SuccessDataResult<Color>(_colorDAL.Get(c => c.Id == id));
         }
 
     }

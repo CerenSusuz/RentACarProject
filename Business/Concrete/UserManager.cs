@@ -1,4 +1,5 @@
-﻿using Core.Utilities.Results.Abstract;
+﻿using Business.Abstract;
+using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -8,7 +9,7 @@ using System.Text;
 
 namespace Business.Concrete
 {
-    public class UserManager
+    public class UserManager : IUserService
     {
         IUserDAL _userDAL;
         public UserManager(IUserDAL userDAL)
@@ -35,9 +36,9 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<User>>(_userDAL.GetAll());
         }
-        public IDataResult<User> GetById(User User)
+        public IDataResult<User> GetById(int id)
         {
-            return new SuccessDataResult<User>(_userDAL.Get(c => c.Id == User.Id));
+            return new SuccessDataResult<User>(_userDAL.Get(c => c.Id == id));
         }
     }
 }

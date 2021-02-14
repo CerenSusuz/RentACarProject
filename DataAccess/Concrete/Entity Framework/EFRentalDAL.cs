@@ -1,4 +1,5 @@
 ﻿using Core.DataAccess.EntityFramework;
+using Core.Utilities.Results.Abstract;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -31,9 +32,10 @@ namespace DataAccess.Concrete.Entity_Framework
                                  CarName = brand.Name,
                                  CompanyName = customer.CompanyName,
                                  UserName = user.FirstName + " " + user.LastName,
-                                 RentDate = rental.RentDate,
-                                 ReturnDate = rental.ReturnDate
+                                 RentDate = Convert.ToDateTime(rental.RentDate),
+                                 ReturnDate = Convert.ToDateTime(rental.ReturnDate)
                              };
+
                 return result.ToList();
             }
         }
