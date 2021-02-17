@@ -28,6 +28,17 @@ namespace ConsoleUI
             // AddUserManuel(userManager);
 
             // TakeInfoAndAddUser(userManager);
+
+            Car car = new Car
+            {
+                BrandId = 2,
+                ColorId = 3,
+                DailyPrice = 200,
+                Description = "New Model",
+                ModelYear = 2021,
+            };
+
+            carManager.Delete(car);
         }
 
         private static void TakeInfoAndAddUser(UserManager userManager)
