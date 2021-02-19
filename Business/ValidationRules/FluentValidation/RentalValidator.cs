@@ -11,6 +11,7 @@ namespace Business.ValidationRules.FluentValidation
         public RentalValidator()
         {
             RuleFor(r => r.ReturnDate).NotNull();
+            RuleFor(r => r.ReturnDate).GreaterThanOrEqualTo(r => r.RentDate).When(r => r.ReturnDate.HasValue);
         }
     }
 }
