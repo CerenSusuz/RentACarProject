@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -18,13 +20,9 @@ namespace Business.Concrete
             _carDAL = carDAL;
         }
 
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
-            if (car.DailyPrice < 0)
-            {
-                Console.WriteLine("Enter the daily price of the car at a greater value than zero.");
-                return new ErrorResult();
-            }
             _carDAL.Add(car);
             return new SuccessResult(Messages.Added);
 
