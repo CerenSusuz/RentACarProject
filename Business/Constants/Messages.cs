@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,5 +13,7 @@ namespace Business.Constants
         public static string Listed = "List process OK";
         public static string MaintenanceTime = "System is under maintenance";
         public static string FailedRental = "The car has not yet been delivered";
+        public static string CarImageLimitExceeded = "More than 5 images cannot be added";
+        public static string NoCarImages = "The car does NOT have any images";
     }
 }

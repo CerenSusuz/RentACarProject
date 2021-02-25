@@ -61,5 +61,6 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Car>>(_carDAL.GetAll(c => c.ColorId == id));
         }
+
     }
 }

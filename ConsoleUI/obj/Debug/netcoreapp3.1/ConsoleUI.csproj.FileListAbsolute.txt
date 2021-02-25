@@ -122,3 +122,8 @@ C:\Users\CEREN\Desktop\ReCapProject-main\ConsoleUI\bin\Debug\netcoreapp3.1\Core.
 C:\Users\CEREN\Desktop\ReCapProject-main\ConsoleUI\bin\Debug\netcoreapp3.1\Core.pdb
 C:\Users\CEREN\Desktop\kodlama.io\Proje\ReCapProject\ConsoleUI\bin\Debug\netcoreapp3.1\Core.dll
 C:\Users\CEREN\Desktop\kodlama.io\Proje\ReCapProject\ConsoleUI\bin\Debug\netcoreapp3.1\Core.pdb
+C:\Users\CEREN\Desktop\kodlama.io\Proje\ReCapProject\ConsoleUI\bin\Debug\netcoreapp3.1\Autofac.dll
+C:\Users\CEREN\Desktop\kodlama.io\Proje\ReCapProject\ConsoleUI\bin\Debug\netcoreapp3.1\Autofac.Extensions.DependencyInjection.dll
+C:\Users\CEREN\Desktop\kodlama.io\Proje\ReCapProject\ConsoleUI\bin\Debug\netcoreapp3.1\Autofac.Extras.DynamicProxy.dll
+C:\Users\CEREN\Desktop\kodlama.io\Proje\ReCapProject\ConsoleUI\bin\Debug\netcoreapp3.1\Castle.Core.dll
+C:\Users\CEREN\Desktop\kodlama.io\Proje\ReCapProject\ConsoleUI\bin\Debug\netcoreapp3.1\FluentValidation.dll
