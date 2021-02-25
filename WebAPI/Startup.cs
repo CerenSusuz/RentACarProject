@@ -4,6 +4,7 @@ using DataAccess.Abstract;
 using DataAccess.Concrete.Entity_Framework;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -30,24 +31,6 @@ namespace WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-
-            //services.AddSingleton<IUserService, UserManager>();
-            //services.AddSingleton<IUserDAL, EFUserDAL>();
-
-            //services.AddSingleton<IRentalService, RentalManager>();
-            //services.AddSingleton<IRentalDAL, EFRentalDAL>();
-
-            //services.AddSingleton<IBrandService, BrandManager>();
-            //services.AddSingleton<IBrandDAL, EFBrandDAL>();
-
-            //services.AddSingleton<IColorService, ColorManager>();
-            //services.AddSingleton<IColorDAL, EFColorDAL>();
-
-            //services.AddSingleton<ICustomerService, CustomerManager>();
-            //services.AddSingleton<ICustomerDAL, EFCustomerDAL>();
-
-            //services.AddSingleton<ICarService, CarManager>();
-            //services.AddSingleton<ICarDAL, EFCarDAL>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

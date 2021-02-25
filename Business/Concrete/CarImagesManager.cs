@@ -9,13 +9,17 @@ using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace Business.Concrete
 {
+
     public class CarImageManager : ICarImageService
     {
         ICarImageDAL _carImageDAL;
+
         public CarImageManager(ICarImageDAL carImageDAL)
         {
             _carImageDAL = carImageDAL;
@@ -24,81 +28,78 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Add(CarImage carImage)
         {
-            var result = BusinessRules.Run(CheckCarImageLimitExceded(carImage.CarId));
-
+            IResult result = BusinessRules.Run(CheckCarImageLimitExceeded(carImage.CarId) );
             if (result != null)
             {
                 return result;
             }
+            var createdImage = TakeFileName(carImage).Data;
+            _carImageDAL.Add(createdImage);
+            return new SuccessResult();
 
-            TakeImagePath(carImage);
-
-            _carImageDAL.Add(carImage);
-            return new SuccessResult(Messages.Added);
         }
-        public IResult Delete(CarImage carImages)
+        public IResult Delete(CarImage carImage)
         {
-            _carImageDAL.Delete(carImages);
-            return new SuccessResult(Messages.Deleted);
-        }
-        public IDataResult<List<CarImage>> GetAll()
-        {
-            return new SuccessDataResult<List<CarImage>>(_carImageDAL.GetAll(), Messages.Listed);
-        }
-        public IDataResult<CarImage> GetById(int id)
-        {
-            return new SuccessDataResult<CarImage>(_carImageDAL.Get(c => c.Id == id));
-        }
-        public IDataResult<List<CarImage>> GetImagesByCarId(int id)
-        {
-            var result = BusinessRules.Run(CheckCarImageCount(id));
-
-            if (result != null)
-            {
-                return new ErrorDataResult<List<CarImage>>(new List<CarImage> { new CarImage { ImagePath = "C:\\Users\\CEREN\\Desktop\\kodlama.io\\Proje\\Images\\CarImages\\logo.jpg" } });
-            }
-
-            return new SuccessDataResult<List<CarImage>>(_carImageDAL.GetAll(c => c.CarId == id));
-
+            File.Delete(carImage.ImagePath);
+            _carImageDAL.Delete(carImage);
+            return new SuccessResult();
         }
         public IResult Update(CarImage carImage)
         {
-            var result = BusinessRules.Run(CheckCarImageLimitExceded(carImage.CarId));
-            
-            if (result != null)
-            {
-                return result;
-            }
-
-            string newPath = TakeImagePath(carImage);
-            carImage.ImagePath = newPath;
-            _carImageDAL.Update(carImage);
-            return new SuccessResult(Messages.Updated);
+            var updatedImage = TakeFileName(carImage).Data;
+            File.Copy(carImage.ImagePath, updatedImage.ImagePath);
+            File.Delete(carImage.ImagePath);
+            _carImageDAL.Update(updatedImage);
+            return new SuccessResult();
+        }
+        public IDataResult<CarImage> GetById(int id)
+        {
+            return new SuccessDataResult<CarImage>(_carImageDAL.Get(p => p.Id == id));
+        }
+        public IDataResult<List<CarImage>> GetAll()
+        {
+            return new SuccessDataResult<List<CarImage>>(_carImageDAL.GetAll());
+        }
+        public IDataResult<List<CarImage>> GetImagesByCarId(int id)
+        {
+            return new SuccessDataResult<List<CarImage>>(CheckCarImageNull(id));
         }
 
-        private string TakeImagePath(CarImage carImage)
+        private IResult CheckCarImageLimitExceeded(int carid)
         {
-            var newPath = Guid.NewGuid().ToString() + ".jpg";
-            carImage.ImagePath = newPath;
-            return newPath;
-        }
-        private IResult CheckCarImageLimitExceded(int id)
-        {
-            var result = _carImageDAL.GetAll(c => c.CarId == id);
-            if (result.Count >= 5)
+            var carImageCount = _carImageDAL.GetAll(p => p.CarId == carid).Count;
+            if (carImageCount >= 5)
             {
                 return new ErrorResult(Messages.CarImageLimitExceeded);
             }
+
             return new SuccessResult();
         }
-        private IResult CheckCarImageCount(int id)
+        private IDataResult<CarImage> TakeFileName(CarImage carImage)
         {
-            var result = _carImageDAL.GetAll(c => c.CarId == id).Count == 0;
-            if (result)
+            var guidName = Guid.NewGuid().ToString() + ".jpg";
+            string path = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).FullName + @"~\Content\img");
+            string source = Path.Combine(carImage.ImagePath);
+            string result = $@"{path}\{guidName}";
+            try
             {
-                return new ErrorResult(Messages.NoCarImages);
+                File.Move(source, path + @"\" + guidName);
             }
-            return new SuccessResult();
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<CarImage>(exception.Message);
+            }
+            return new SuccessDataResult<CarImage>(new CarImage { Id = carImage.Id, CarId = carImage.CarId, ImagePath = result, Date = DateTime.Now });
+        }
+        private List<CarImage> CheckCarImageNull(int id)
+        {
+            string path = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).FullName + @"Content\img\logo.jpg");
+            var result = _carImageDAL.GetAll(c => c.CarId == id).Any();
+            if (!result)
+            {
+                return new List<CarImage> { new CarImage { CarId = id, ImagePath = path, Date = DateTime.Now } };
+            }
+            return _carImageDAL.GetAll(p => p.CarId == id);
         }
 
     }
