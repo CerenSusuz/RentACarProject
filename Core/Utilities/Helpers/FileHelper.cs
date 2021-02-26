@@ -43,9 +43,8 @@ namespace Core.Utilities.Helpers
         {
             FileInfo ff = new FileInfo(file.FileName);
             string fileExtension = ff.Extension;
-            var newPath = Guid.NewGuid().ToString()
-               + "/" + DateTime.Now.Month + "/" + DateTime.Now.Day + "/" + DateTime.Now.Year + fileExtension;
-            string path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName + @"Content\img");
+            var newPath = Guid.NewGuid().ToString() + "/" + DateTime.Now.Month + "/" + DateTime.Now.Day + "/" + DateTime.Now.Year + fileExtension;
+            string path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).FullName + @"\Images\carImages");
             string result = $@"{path}\{newPath}";
             return result;
         }
