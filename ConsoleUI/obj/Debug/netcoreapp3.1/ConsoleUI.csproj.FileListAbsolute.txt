@@ -127,3 +127,10 @@ C:\Users\CEREN\Desktop\kodlama.io\Proje\ReCapProject\ConsoleUI\bin\Debug\netcore
 C:\Users\CEREN\Desktop\kodlama.io\Proje\ReCapProject\ConsoleUI\bin\Debug\netcoreapp3.1\Autofac.Extras.DynamicProxy.dll
 C:\Users\CEREN\Desktop\kodlama.io\Proje\ReCapProject\ConsoleUI\bin\Debug\netcoreapp3.1\Castle.Core.dll
 C:\Users\CEREN\Desktop\kodlama.io\Proje\ReCapProject\ConsoleUI\bin\Debug\netcoreapp3.1\FluentValidation.dll
+C:\Users\CEREN\Desktop\kodlama.io\Proje\ReCapProject\ConsoleUI\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Hosting.Abstractions.dll
+C:\Users\CEREN\Desktop\kodlama.io\Proje\ReCapProject\ConsoleUI\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Hosting.Server.Abstractions.dll
+C:\Users\CEREN\Desktop\kodlama.io\Proje\ReCapProject\ConsoleUI\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.Abstractions.dll
+C:\Users\CEREN\Desktop\kodlama.io\Proje\ReCapProject\ConsoleUI\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.Features.dll
+C:\Users\CEREN\Desktop\kodlama.io\Proje\ReCapProject\ConsoleUI\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\Users\CEREN\Desktop\kodlama.io\Proje\ReCapProject\ConsoleUI\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Hosting.Abstractions.dll
+C:\Users\CEREN\Desktop\kodlama.io\Proje\ReCapProject\ConsoleUI\bin\Debug\netcoreapp3.1\System.IO.Pipelines.dll
