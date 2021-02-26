@@ -45,10 +45,11 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-        
+
         [HttpPut("update")]
-        public IActionResult Update([FromForm(Name = ("Image"))] IFormFile file, [FromForm] CarImage carImage)
+        public IActionResult Update([FromForm(Name = ("Image"))] IFormFile file, [FromForm(Name = ("Id"))] int Id)
         {
+            var carImage = _carImageService.Get(Id).Data;
             var result = _carImageService.Update(file, carImage);
             if (result.Success)
             {
