@@ -24,11 +24,13 @@ namespace Business.Concrete
             _customerDAL.Add(customer);
             return new SuccessResult();
         }
+        [ValidationAspect(typeof(CustomerValidator))]
         public IResult Delete(Customer customer)
         {
             _customerDAL.Delete(customer);
             return new SuccessResult();
         }
+        [ValidationAspect(typeof(CustomerValidator))]
         public IResult Update(Customer customer)
         {
             _customerDAL.Update(customer);

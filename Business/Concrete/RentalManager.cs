@@ -32,6 +32,7 @@ namespace Business.Concrete
             _rentalDAL.Delete(rental);
             return new SuccessResult();
         }
+        [ValidationAspect(typeof(RentalValidator))]
         public IResult Update(Rental rental)
         {
             _rentalDAL.Update(rental);

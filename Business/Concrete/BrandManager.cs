@@ -42,6 +42,5 @@ namespace Business.Concrete
             return new SuccessDataResult<Brand>(_brandDAL.Get(b => b.Id == id));
         }
 
-
     }
 }
