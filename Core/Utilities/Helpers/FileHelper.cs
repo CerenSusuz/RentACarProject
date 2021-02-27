@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Core.Utilities.Results.Abstract;
+using Core.Utilities.Results.Concrete;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,9 +24,18 @@ namespace Core.Utilities.Helpers
             File.Move(sourcepath, result);
             return result;
         }
-        public static void Delete(string path)
+        public static IResult Delete(string path)
         {
-            File.Delete(path);
+            try
+            {
+                File.Delete(path);
+            }
+            catch (Exception exception)
+            {
+                return new ErrorResult(exception.Message);
+            }
+
+            return new SuccessResult();
         }
         public static string Update(string sourcePath, IFormFile file)
         {

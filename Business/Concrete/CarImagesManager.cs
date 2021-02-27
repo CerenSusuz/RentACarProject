@@ -41,11 +41,7 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Delete(CarImage carImage)
         {
-            IResult result = BusinessRules.Run(CarImageDelete(carImage));
-            if (result != null)
-            {
-                return result;
-            }
+            FileHelper.Delete(carImage.ImagePath);
             _carImageDAL.Delete(carImage);
             return new SuccessResult();
         }
@@ -93,20 +89,7 @@ namespace Business.Concrete
             }
             return _carImageDAL.GetAll(p => p.CarId == id);
         }
-        private IResult CarImageDelete(CarImage carImage)
-        {
-            try
-            {
-                File.Delete(carImage.ImagePath);
-            }
-            catch (Exception exception)
-            {
 
-                return new ErrorResult(exception.Message);
-            }
-
-            return new SuccessResult();
-        }
     }
 }
 
