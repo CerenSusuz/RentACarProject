@@ -4,45 +4,40 @@ using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
-using Entities.Concrete;
+using Core.Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Business.Constants;
 
 namespace Business.Concrete
 {
     public class UserManager : IUserService
     {
         IUserDAL _userDAL;
+
         public UserManager(IUserDAL userDAL)
         {
             _userDAL = userDAL;
         }
-        [ValidationAspect(typeof(UserValidator))]
-        public IResult Add(User User)
+
+        public List<OperationClaim> GetClaims(User user)
         {
-            _userDAL.Add(User);
-            return new SuccessResult();
+            return _userDAL.GetClaims(user);
         }
-        [ValidationAspect(typeof(UserValidator))]
-        public IResult Delete(User User)
+
+        public void Add(User user)
         {
-            _userDAL.Delete(User);
-            return new SuccessResult();
+            _userDAL.Add(user);
+            
         }
-        [ValidationAspect(typeof(UserValidator))]
-        public IResult Update(User User)
+
+        public User GetByMail(string email)
         {
-            _userDAL.Update(User);
-            return new SuccessResult();
-        }
-        public IDataResult<List<User>> GetUsers()
-        {
-            return new SuccessDataResult<List<User>>(_userDAL.GetAll());
-        }
-        public IDataResult<User> GetById(int id)
-        {
-            return new SuccessDataResult<User>(_userDAL.Get(c => c.Id == id));
+            return _userDAL.Get(u => u.Email == email);
         }
     }
 }
+
+
+
