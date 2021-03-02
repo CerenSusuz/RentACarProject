@@ -29,11 +29,15 @@ namespace Business.Concrete
             return new SuccessResult(Messages.Added);
 
         }
+
+        [SecuredOperation("car.delete,admin")]
         public IResult Delete(Car car)
         {
             _carDAL.Delete(car);
             return new SuccessResult(Messages.Deleted);
         }
+        
+        [SecuredOperation("car.update,admin")]
         public IResult Update(Car car)
         {
             _carDAL.Update(car);
