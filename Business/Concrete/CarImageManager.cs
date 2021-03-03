@@ -64,15 +64,18 @@ namespace Business.Concrete
             _carImageDAL.Update(carImage);
             return new SuccessResult();
         }
+        
         [ValidationAspect(typeof(CarImageValidator))]
         public IDataResult<CarImage> Get(int id)
         {
             return new SuccessDataResult<CarImage>(_carImageDAL.Get(p => p.Id == id));
         }
+       
         public IDataResult<List<CarImage>> GetAll()
         {
             return new SuccessDataResult<List<CarImage>>(_carImageDAL.GetAll());
         }
+        
         [ValidationAspect(typeof(CarImageValidator))]
         public IDataResult<List<CarImage>> GetImagesByCarId(int id)
         {
@@ -92,7 +95,7 @@ namespace Business.Concrete
         }
         private List<CarImage> CheckIfCarImageNull(int id)
         {
-            string path = @"\Images\logo.jpg";
+            string path = @"C:\Users\Ceren\Desktop\RentACarProject-main\WebAPI\Images\logo.jpg";
             var result = _carImageDAL.GetAll(c => c.CarId == id).Any();
             if (!result)
             {
