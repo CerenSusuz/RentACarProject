@@ -26,7 +26,7 @@ namespace Business.Concrete
         {
             _carImageDAL = carImageDAL;
         }
-        [SecuredOperation("carImages.add,admin")]
+        //[SecuredOperation("carImages.add,admin")]
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Add(IFormFile file, CarImage carImage)
         {

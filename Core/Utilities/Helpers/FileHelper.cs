@@ -15,9 +15,9 @@ namespace Core.Utilities.Helpers
             var sourcepath = Path.GetTempFileName();
             if (file.Length > 0)
             {
-                using (var stream = new FileStream(sourcepath, FileMode.Create))
+                using (var uploading = new FileStream(sourcepath, FileMode.Create))
                 { 
-                    file.CopyTo(stream); 
+                    file.CopyTo(uploading); 
                 }
             }
             var result = newPath(file);
@@ -39,7 +39,7 @@ namespace Core.Utilities.Helpers
         }
         public static string Update(string sourcePath, IFormFile file)
         {
-            var result = newPath(file);
+            var result = newPath(file).ToString();
             if (sourcePath.Length > 0)
             {
                 using (var stream = new FileStream(result, FileMode.Create))
@@ -55,8 +55,8 @@ namespace Core.Utilities.Helpers
             FileInfo ff = new FileInfo(file.FileName);
             string fileExtension = ff.Extension;
 
-            string path = Environment.CurrentDirectory + @"\Images";
-            var newPath = Guid.NewGuid().ToString() + "_" + DateTime.Now.Month + "_" + DateTime.Now.Day + "_" + DateTime.Now.Year + fileExtension;
+            string path = Environment.CurrentDirectory + @"\wwwroot\uploads";
+            var newPath = Guid.NewGuid().ToString() + fileExtension ;
             
             string result = $@"{path}\{newPath}";
             return result;
