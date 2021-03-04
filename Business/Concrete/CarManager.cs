@@ -21,7 +21,7 @@ namespace Business.Concrete
             _carDAL = carDAL;
         }
 
-        //[SecuredOperation("car.add,admin")]
+        [SecuredOperation("car.add,admin")]
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
@@ -30,19 +30,20 @@ namespace Business.Concrete
 
         }
 
-        //[SecuredOperation("car.delete,admin")]
+        [SecuredOperation("car.delete,admin")]
         public IResult Delete(Car car)
         {
             _carDAL.Delete(car);
             return new SuccessResult(Messages.Deleted);
         }
-        
-        //[SecuredOperation("car.update,admin")]
+       
+        [SecuredOperation("car.update,admin")]
         public IResult Update(Car car)
         {
             _carDAL.Update(car);
             return new SuccessResult(Messages.Updated);
         }
+        
         public IDataResult<List<Car>> GetAll()
         {
             if (DateTime.Now.Hour == 03)
@@ -51,18 +52,22 @@ namespace Business.Concrete
             }
             return new SuccessDataResult<List<Car>>(_carDAL.GetAll(),Messages.Listed);
         }
+        
         public IDataResult<List<Car>> GetByDailyPrice(decimal min, decimal max)
         {
             return new SuccessDataResult<List<Car>>(_carDAL.GetAll(c => c.DailyPrice >= min && c.DailyPrice <= max), Messages.Listed);
         }
+       
         public IDataResult<Car> GetById(int id)
         {
             return new SuccessDataResult<Car>(_carDAL.Get(c => c.Id == id));
         }
+        
         public IDataResult<List<Car>> GetCarsByBrandId(int id)
         {
             return new SuccessDataResult<List<Car>>(_carDAL.GetAll(c => c.BrandId == id));
         }
+        
         public IDataResult<List<Car>> GetCarsByColorId(int id)
         {
             return new SuccessDataResult<List<Car>>(_carDAL.GetAll(c => c.ColorId == id));

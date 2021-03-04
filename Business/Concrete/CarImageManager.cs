@@ -27,7 +27,7 @@ namespace Business.Concrete
             _carImageDAL = carImageDAL;
         }
 
-        //[SecuredOperation("carImages.add,admin")]
+        [SecuredOperation("carImages.add,admin")]
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Add(IFormFile file, CarImage carImage)
         {
@@ -42,7 +42,7 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        //[SecuredOperation("carImages.delete,admin")]
+        [SecuredOperation("carImages.delete,admin")]
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Delete(CarImage carImage)
         {
@@ -51,7 +51,7 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        //[SecuredOperation("carImages.update,admin")]
+        [SecuredOperation("carImages.update,admin")]
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Update(IFormFile file, CarImage carImage)
         {

@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspect.Autofac;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -17,16 +18,21 @@ namespace Business.Concrete
             _colorDAL = colorDAL;
         }
 
+        [SecuredOperation("color.add,admin")]
         public IResult Add(Color color)
         {
             _colorDAL.Add(color);
             return new SuccessResult();
         }
+
+        [SecuredOperation("color.delete,admin")]
         public IResult Delete(Color color)
         {
             _colorDAL.Delete(color);
             return new SuccessResult();
         }
+
+        [SecuredOperation("color.update,admin")]
         public IResult Update(Color color)
         {
             _colorDAL.Update(color);
