@@ -25,4 +25,5 @@ namespace DataAccess.Concrete.Entity_Framework
             }
         }
     }
+
 }
