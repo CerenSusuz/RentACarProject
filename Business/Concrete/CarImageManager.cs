@@ -2,6 +2,7 @@
 using Business.BusinessAspect.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Helpers;
@@ -27,6 +28,7 @@ namespace Business.Concrete
             _carImageDAL = carImageDAL;
         }
 
+        [CacheRemoveAspect("ICarImageService.Get")]
         [SecuredOperation("carImages.add,admin")]
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Add(IFormFile file, CarImage carImage)
@@ -42,6 +44,7 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
+        [CacheRemoveAspect("ICarImageService.Get")]
         [SecuredOperation("carImages.delete,admin")]
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Delete(CarImage carImage)
@@ -51,6 +54,7 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
+        [CacheRemoveAspect("ICarImageService.Get")]
         [SecuredOperation("carImages.update,admin")]
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Update(IFormFile file, CarImage carImage)
@@ -65,18 +69,21 @@ namespace Business.Concrete
             _carImageDAL.Update(carImage);
             return new SuccessResult();
         }
-        
+
+        [CacheAspect]
         [ValidationAspect(typeof(CarImageValidator))]
         public IDataResult<CarImage> Get(int id)
         {
             return new SuccessDataResult<CarImage>(_carImageDAL.Get(p => p.Id == id));
         }
-       
+
+        [CacheAspect]
         public IDataResult<List<CarImage>> GetAll()
         {
             return new SuccessDataResult<List<CarImage>>(_carImageDAL.GetAll());
         }
-        
+
+        [CacheAspect]
         [ValidationAspect(typeof(CarImageValidator))]
         public IDataResult<List<CarImage>> GetImagesByCarId(int id)
         {
@@ -101,6 +108,8 @@ namespace Business.Concrete
 
             return new SuccessResult();
         }
+
+        [CacheAspect]
         private IDataResult<List<CarImage>> CheckIfCarImageNull(int id)
         {
             try

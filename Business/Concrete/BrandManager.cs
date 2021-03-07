@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.BusinessAspect.Autofac;
 using Business.Constants;
+using Core.Aspects.Autofac.Caching;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -19,6 +20,7 @@ namespace Business.Concrete
             _brandDAL = brandDal;
         }
 
+        [CacheRemoveAspect("IBrandService.Get")]
         [SecuredOperation("brand.add,admin")]
         public IResult Add(Brand brand)
         {
@@ -26,6 +28,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.Added);
         }
 
+        [CacheRemoveAspect("IBrandService.Get")]
         [SecuredOperation("brand.delete,admin")]
         public IResult Delete(Brand brand)
         {
@@ -33,18 +36,21 @@ namespace Business.Concrete
             return new SuccessResult(Messages.Deleted);
         }
 
+        [CacheRemoveAspect("IBrandService.Get")]
         [SecuredOperation("brand.update,admin")]
         public IResult Update(Brand brand)
         {
             _brandDAL.Update(brand);
             return new SuccessResult(Messages.Updated);
         }
-        
+
+        [CacheAspect]
         public IDataResult<List<Brand>> GetBrands()
         {
             return new SuccessDataResult<List<Brand>>(_brandDAL.GetAll());
         }
-        
+
+        [CacheAspect]
         public IDataResult<Brand> GetById(int id)
         {
             return new SuccessDataResult<Brand>(_brandDAL.Get(b => b.Id == id));
