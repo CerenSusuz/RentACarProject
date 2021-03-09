@@ -80,6 +80,19 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "OperationClaims",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OperationClaims", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Rentals",
                 columns: table => new
                 {
@@ -96,6 +109,20 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserOperationClaims",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(nullable: false),
+                    OperationClaimId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserOperationClaims", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -104,8 +131,9 @@ namespace DataAccess.Migrations
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true),
-                    RePassword = table.Column<string>(nullable: true)
+                    PasswordHash = table.Column<byte[]>(nullable: true),
+                    PasswordSalt = table.Column<byte[]>(nullable: true),
+                    Status = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -131,7 +159,13 @@ namespace DataAccess.Migrations
                 name: "Customers");
 
             migrationBuilder.DropTable(
+                name: "OperationClaims");
+
+            migrationBuilder.DropTable(
                 name: "Rentals");
+
+            migrationBuilder.DropTable(
+                name: "UserOperationClaims");
 
             migrationBuilder.DropTable(
                 name: "Users");
