@@ -11,6 +11,7 @@ using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Entities.DTOs;
 
 namespace Business.Concrete
 {
@@ -28,7 +29,7 @@ namespace Business.Concrete
         public IResult Add(Car car)
         {
             _carDAL.Add(car);
-            return new SuccessResult(Messages.Added);
+            return new SuccessResult();
 
         }
 
@@ -37,7 +38,7 @@ namespace Business.Concrete
         public IResult Delete(Car car)
         {
             _carDAL.Delete(car);
-            return new SuccessResult(Messages.Deleted);
+            return new SuccessResult();
         }
        
         [SecuredOperation("car.update,admin")]
@@ -45,7 +46,7 @@ namespace Business.Concrete
         public IResult Update(Car car)
         {
             _carDAL.Update(car);
-            return new SuccessResult(Messages.Updated);
+            return new SuccessResult();
         }
        
         [CacheAspect]
@@ -55,13 +56,13 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
             }
-            return new SuccessDataResult<List<Car>>(_carDAL.GetAll(),Messages.Listed);
+            return new SuccessDataResult<List<Car>>(_carDAL.GetAll());
         }
 
         [CacheAspect]
         public IDataResult<List<Car>> GetByDailyPrice(decimal min, decimal max)
         {
-            return new SuccessDataResult<List<Car>>(_carDAL.GetAll(c => c.DailyPrice >= min && c.DailyPrice <= max), Messages.Listed);
+            return new SuccessDataResult<List<Car>>(_carDAL.GetAll(c => c.DailyPrice >= min && c.DailyPrice <= max));
         }
 
         [CacheAspect]
@@ -82,7 +83,15 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDAL.GetAll(c => c.ColorId == id));
         }
 
-
+        [CacheAspect]
+        public IDataResult<List<CarDetailDto>> GetCarDetails()
+        {
+            if (DateTime.Now.Hour == 06)
+            {
+                return new ErrorDataResult<List<CarDetailDto>>(Messages.MaintenanceTime);
+            }
+            return new SuccessDataResult<List<CarDetailDto>>(_carDAL.GetCarDetails());
+        }
 
     }
 }

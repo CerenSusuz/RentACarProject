@@ -3,6 +3,7 @@ using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Entities.DTOs;
 
 namespace Business.Abstract
 {
@@ -16,6 +17,7 @@ namespace Business.Abstract
         IDataResult<List<Car>> GetByDailyPrice(decimal min, decimal max);
         IDataResult<List<Car>> GetCarsByBrandId(int id );
         IDataResult<List<Car>> GetCarsByColorId(int id);
+        IDataResult<List<CarDetailDto>> GetCarDetails();
     }
 
 }

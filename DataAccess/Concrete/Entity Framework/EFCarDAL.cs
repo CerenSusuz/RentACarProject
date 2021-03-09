@@ -15,7 +15,7 @@ namespace DataAccess.Concrete.Entity_Framework
 {
     public class EFCarDAL : EFEntityRepositoryBase<Car, ReCapDbContext>, ICarDAL
     {
-        public List<CarDetailDto> GetCarDetailDtos(Expression<Func<Car, bool>> filter = null)
+        public List<CarDetailDto> GetCarDetails(Expression<Func<Car, bool>> filter = null)
         {
             using (ReCapDbContext context = new ReCapDbContext())
             {

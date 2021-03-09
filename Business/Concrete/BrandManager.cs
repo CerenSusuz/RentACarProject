@@ -25,7 +25,7 @@ namespace Business.Concrete
         public IResult Add(Brand brand)
         {
             _brandDAL.Add(brand);
-            return new SuccessResult(Messages.Added);
+            return new SuccessResult();
         }
 
         [CacheRemoveAspect("IBrandService.Get")]
@@ -33,7 +33,7 @@ namespace Business.Concrete
         public IResult Delete(Brand brand)
         {
             _brandDAL.Delete(brand);
-            return new SuccessResult(Messages.Deleted);
+            return new SuccessResult();
         }
 
         [CacheRemoveAspect("IBrandService.Get")]
@@ -41,7 +41,7 @@ namespace Business.Concrete
         public IResult Update(Brand brand)
         {
             _brandDAL.Update(brand);
-            return new SuccessResult(Messages.Updated);
+            return new SuccessResult();
         }
 
         [CacheAspect]
