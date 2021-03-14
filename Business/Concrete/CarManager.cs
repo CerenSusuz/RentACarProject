@@ -18,9 +18,11 @@ namespace Business.Concrete
     public class CarManager : ICarService
     {
         ICarDAL _carDAL;
-        public CarManager(ICarDAL carDAL)
+        ICarImageService _carImageService;
+        public CarManager(ICarDAL carDAL, ICarImageService carImageService)
         {
             _carDAL = carDAL;
+            _carImageService = carImageService;
         }
 
         [SecuredOperation("car.add,admin")]
@@ -72,21 +74,37 @@ namespace Business.Concrete
         }
 
         [CacheAspect]
-        public IDataResult<List<Car>> GetCarsByBrandId(int id)
+        public IDataResult<List<CarDetailDto>> GetByBrand(int brandId)
         {
-            return new SuccessDataResult<List<Car>>(_carDAL.GetAll(c => c.BrandId == id));
+            return new SuccessDataResult<List<CarDetailDto>>(_carDAL.GetCarDetails(c => c.BrandId == brandId));
         }
 
         [CacheAspect]
-        public IDataResult<List<Car>> GetCarsByColorId(int id)
+        public IDataResult<List<CarDetailDto>> GetByColor(int colorId)
         {
-            return new SuccessDataResult<List<Car>>(_carDAL.GetAll(c => c.ColorId == id));
+            return new SuccessDataResult<List<CarDetailDto>>(_carDAL.GetCarDetails(c => c.ColorId==colorId));
         }
 
         [CacheAspect]
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
             return new SuccessDataResult<List<CarDetailDto>>(_carDAL.GetCarDetails());
+        }
+
+        [CacheAspect]
+        public IDataResult<CarDetailsViaImagesDto> GetCarDetailsViaImages(int carId)
+        {
+            var images = _carImageService.GetImagesByCarId(carId);
+
+            var carDetail = _carDAL.GetCarDetailsViaId(carId);
+
+            var carDetailsViaImages = new CarDetailsViaImagesDto()
+            {
+                CarDetail = carDetail,
+                CarImages = images.Data
+            };
+
+            return new SuccessDataResult<CarDetailsViaImagesDto>(carDetailsViaImages);
         }
 
     }

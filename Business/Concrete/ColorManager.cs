@@ -52,7 +52,7 @@ namespace Business.Concrete
         [CacheAspect]
         public IDataResult<Color> GetById(int id)
         {
-            return new SuccessDataResult<Color>(_colorDAL.Get(c => c.Id == id));
+            return new SuccessDataResult<Color>(_colorDAL.Get(c => c.ColorId == id));
         }
 
     }

@@ -53,7 +53,7 @@ namespace Business.Concrete
         [CacheAspect]
         public IDataResult<Brand> GetById(int id)
         {
-            return new SuccessDataResult<Brand>(_brandDAL.Get(b => b.Id == id));
+            return new SuccessDataResult<Brand>(_brandDAL.Get(b => b.BrandId == id));
         }
 
     }
