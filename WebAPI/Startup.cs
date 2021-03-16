@@ -27,6 +27,7 @@ namespace WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
             services.AddCors();
 
             var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
@@ -62,9 +63,9 @@ namespace WebAPI
 
             app.UseHttpsRedirection();
 
-            app.UseStaticFiles();
-
             app.UseRouting();
+
+            app.UseStaticFiles();
 
             app.UseAuthentication();
 

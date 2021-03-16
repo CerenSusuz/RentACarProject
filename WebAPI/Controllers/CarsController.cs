@@ -96,7 +96,7 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result.Message);
         }
-    
+
         [HttpGet("getbycolor")]
         public IActionResult GetByColor(int colorId)
         {
@@ -110,7 +110,7 @@ namespace WebAPI.Controllers
 
         [HttpGet("getcardetails")]
         public IActionResult GetCarDetails()
-        { 
+        {
             //Thread.Sleep(2000);
             var result = _carService.GetCarDetails();
             if (result.Success)

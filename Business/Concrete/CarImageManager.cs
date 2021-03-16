@@ -38,6 +38,7 @@ namespace Business.Concrete
             {
                 return result;
             }
+
             carImage.ImagePath = FileHelper.Add(file);
             carImage.Date = DateTime.Now;
             _carImageDAL.Add(carImage);
@@ -64,7 +65,10 @@ namespace Business.Concrete
             {
                 return result;
             }
-            carImage.ImagePath = FileHelper.Update(_carImageDAL.Get(p => p.Id == carImage.Id).ImagePath, file);
+
+            var oldPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..\\..\\..\\wwwroot")) + _carImageDAL.Get(p => p.Id == carImage.Id).ImagePath;
+
+            carImage.ImagePath = FileHelper.Update(oldPath, file);
             carImage.Date = DateTime.Now;
             _carImageDAL.Update(carImage);
             return new SuccessResult();
@@ -114,13 +118,13 @@ namespace Business.Concrete
         {
             try
             {
-                string path = @"\wwwroot\uploads\logo.jpg";
+                string path = @"\uploads\default.jpg";
                 var result = _carImageDAL.GetAll(c => c.CarId == id).Any();
                 if (!result)
                 {
-                    List<CarImage> carimage = new List<CarImage>();
-                    carimage.Add(new CarImage { CarId = id, ImagePath = path, Date = DateTime.Now });
-                    return new SuccessDataResult<List<CarImage>>(carimage);
+                    List<CarImage> carImage = new List<CarImage>();
+                    carImage.Add(new CarImage { CarId = id, ImagePath = path, Date = DateTime.Now });
+                    return new SuccessDataResult<List<CarImage>>(carImage);
                 }
             }
             catch (Exception exception)

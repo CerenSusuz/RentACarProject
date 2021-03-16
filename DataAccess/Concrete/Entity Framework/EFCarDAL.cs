@@ -21,31 +21,31 @@ namespace DataAccess.Concrete.Entity_Framework
             using (ReCapDbContext context = new ReCapDbContext())
             {
                 var result = from car in context.Cars
-                    
-                    join color in context.Colors 
-                        on car.ColorId equals color.ColorId
-                    
-                    join brand in context.Brands 
-                        on car.BrandId equals brand.BrandId
-                    
-                    join carImage in context.CarImages 
-                        on car.Id equals carImage.CarId
 
-                    select new CarDetailDto()
-                    {
-                        Id = car.Id,
-                        ImagePath = carImage.ImagePath,
-                        Description = car.Description,
-                        BrandId = brand.BrandId,
-                        BrandName = brand.Name,
-                        ColorId = color.ColorId,
-                        ColorName = color.Name,
-                        DailyPrice = car.DailyPrice,
-                        ModelYear = car.ModelYear
-                    };
+                             join color in context.Colors
+                                 on car.ColorId equals color.ColorId
 
-                return filter == null 
-                    ? result.ToList() 
+                             join brand in context.Brands
+                                 on car.BrandId equals brand.BrandId
+
+                             join carImage in context.CarImages
+                                 on car.Id equals carImage.CarId
+
+                             select new CarDetailDto()
+                             {
+                                 Id = car.Id,
+                                 ImagePath = carImage.ImagePath,
+                                 Description = car.Description,
+                                 BrandId = brand.BrandId,
+                                 BrandName = brand.Name,
+                                 ColorId = color.ColorId,
+                                 ColorName = color.Name,
+                                 DailyPrice = car.DailyPrice,
+                                 ModelYear = car.ModelYear
+                             };
+
+                return filter == null
+                    ? result.ToList()
                     : result.Where(filter).ToList();
             }
         }

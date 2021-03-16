@@ -42,7 +42,7 @@ namespace Business.Concrete
             _carDAL.Delete(car);
             return new SuccessResult();
         }
-       
+
         [SecuredOperation("car.update,admin")]
         [CacheRemoveAspect("ICarService.Get")]
         public IResult Update(Car car)
@@ -50,7 +50,7 @@ namespace Business.Concrete
             _carDAL.Update(car);
             return new SuccessResult();
         }
-       
+
         [CacheAspect]
         public IDataResult<List<Car>> GetAll()
         {
@@ -82,7 +82,7 @@ namespace Business.Concrete
         [CacheAspect]
         public IDataResult<List<CarDetailDto>> GetByColor(int colorId)
         {
-            return new SuccessDataResult<List<CarDetailDto>>(_carDAL.GetCarDetails(c => c.ColorId==colorId));
+            return new SuccessDataResult<List<CarDetailDto>>(_carDAL.GetCarDetails(c => c.ColorId == colorId));
         }
 
         [CacheAspect]
@@ -94,7 +94,7 @@ namespace Business.Concrete
         [CacheAspect]
         public IDataResult<List<CarDetailDto>> GetCarDetail(int carId)
         {
-            return new SuccessDataResult<List<CarDetailDto>>(_carDAL.GetCarDetails(c=>c.Id==carId));
+            return new SuccessDataResult<List<CarDetailDto>>(_carDAL.GetCarDetails(c => c.Id == carId));
         }
 
 
