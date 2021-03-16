@@ -28,13 +28,13 @@ namespace DataAccess.Concrete.Entity_Framework
                              join brand in context.Brands
                                  on car.BrandId equals brand.BrandId
 
-                             join carImage in context.CarImages
-                                 on car.Id equals carImage.CarId
+                             //join carImage in context.CarImages
+                             //    on car.Id equals carImage.CarId
 
                              select new CarDetailDto()
                              {
                                  Id = car.Id,
-                                 ImagePath = carImage.ImagePath,
+                                 //ImagePath = carImage.ImagePath,
                                  Description = car.Description,
                                  BrandId = brand.BrandId,
                                  BrandName = brand.Name,
