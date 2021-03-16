@@ -92,20 +92,12 @@ namespace Business.Concrete
         }
 
         [CacheAspect]
-        public IDataResult<CarDetailsViaImagesDto> GetCarDetailsViaImages(int carId)
+        public IDataResult<List<CarDetailDto>> GetCarDetail(int carId)
         {
-            var images = _carImageService.GetImagesByCarId(carId);
-
-            var carDetail = _carDAL.GetCarDetailsViaId(carId);
-
-            var carDetailsViaImages = new CarDetailsViaImagesDto()
-            {
-                CarDetail = carDetail,
-                CarImages = images.Data
-            };
-
-            return new SuccessDataResult<CarDetailsViaImagesDto>(carDetailsViaImages);
+            return new SuccessDataResult<List<CarDetailDto>>(_carDAL.GetCarDetails(c=>c.Id==carId));
         }
+
+
 
     }
 }
