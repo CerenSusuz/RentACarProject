@@ -119,11 +119,15 @@ namespace Business.Concrete
             try
             {
                 string path = @"\uploads\default.jpg";
+
                 var result = _carImageDAL.GetAll(c => c.CarId == id).Any();
+
                 if (!result)
                 {
                     List<CarImage> carImage = new List<CarImage>();
+                    
                     carImage.Add(new CarImage { CarId = id, ImagePath = path, Date = DateTime.Now });
+
                     return new SuccessDataResult<List<CarImage>>(carImage);
                 }
             }
@@ -133,7 +137,7 @@ namespace Business.Concrete
                 return new ErrorDataResult<List<CarImage>>(exception.Message);
             }
 
-            return new SuccessDataResult<List<CarImage>>(_carImageDAL.GetAll(p => p.CarId == id).ToList());
+            return new SuccessDataResult<List<CarImage>>(_carImageDAL.GetAll(c => c.CarId == id));
         }
 
 
