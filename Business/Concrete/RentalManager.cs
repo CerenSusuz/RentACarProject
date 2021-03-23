@@ -11,14 +11,17 @@ using Entities.Concrete;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using Core.Utilities.Business;
 
 namespace Business.Concrete
 {
     public class RentalManager : IRentalService
     {
         IRentalDAL _rentalDAL;
+
         public RentalManager(IRentalDAL rentalDAL)
         {
             _rentalDAL = rentalDAL;
@@ -67,7 +70,37 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<RentalDetailDto>>(_rentalDAL.GetRentalDetails());
         }
+
+        [CacheAspect]
+        public IDataResult<List<RentalDetailDto>> GetRentalDetailsById(int id)
+        {
+            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDAL.GetRentalDetails(c => c.Id == id));
+        }
+
+        public IDataResult<List<RentalDetailDto>> GetAllUndeliveredRentalDetails()
+        {
+            List<RentalDetailDto> rentalDetailDtos = _rentalDAL.GetRentalDetails(p => p.ReturnDate == null);
+            if (rentalDetailDtos.Count > 0)
+            {
+                return new SuccessDataResult<List<RentalDetailDto>>(rentalDetailDtos);
+            }
+
+            return new ErrorDataResult<List<RentalDetailDto>>();
+
+        }
+
+        public IDataResult<List<RentalDetailDto>> GetAllDeliveredRentalDetails()
+        {
+            List<RentalDetailDto> rentalDetailDtos = _rentalDAL.GetRentalDetails(p => p.ReturnDate != null);
+            if (rentalDetailDtos.Count > 0)
+            {
+                return new SuccessDataResult<List<RentalDetailDto>>(rentalDetailDtos);
+            }
+            return new ErrorDataResult<List<RentalDetailDto>>();
+
+
+        }
     }
-} 
+}
 
 

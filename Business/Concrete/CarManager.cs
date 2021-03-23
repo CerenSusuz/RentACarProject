@@ -18,11 +18,9 @@ namespace Business.Concrete
     public class CarManager : ICarService
     {
         ICarDAL _carDAL;
-        ICarImageService _carImageService;
-        public CarManager(ICarDAL carDAL, ICarImageService carImageService)
+        public CarManager(ICarDAL carDAL)
         {
             _carDAL = carDAL;
-            _carImageService = carImageService;
         }
 
         [SecuredOperation("car.add,admin")]
@@ -97,7 +95,9 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarDetailDto>>(_carDAL.GetCarDetails(c => c.Id == carId));
         }
 
-
-
+        public IDataResult<List<CarDetailDto>> GetCarDetailsByBrandAndColor(int brandId, int colorId)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDAL.GetCarDetails(c => c.ColorId == colorId & c.BrandId == brandId));
+        }
     }
 }

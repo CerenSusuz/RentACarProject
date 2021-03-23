@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Entities.DTOs;
 
 namespace WebAPI.Controllers
 {
@@ -15,9 +16,12 @@ namespace WebAPI.Controllers
     public class RentalsController : ControllerBase
     {
         IRentalService _rentalService;
-        public RentalsController(IRentalService rentalService)
+        IPaymentService _paymentService;
+
+        public RentalsController(IRentalService rentalService,IPaymentService paymentService)
         {
             _rentalService = rentalService;
+            _paymentService = paymentService;
         }
 
         [HttpPost("add")]
@@ -64,7 +68,7 @@ namespace WebAPI.Controllers
             return BadRequest(result.Message);
         }
 
-        [HttpGet("getbyid")]
+        [HttpGet("getbycarid")]
         public IActionResult GetById(int id)
         {
             var result = _rentalService.GetById(id);
@@ -87,5 +91,16 @@ namespace WebAPI.Controllers
             return BadRequest(result.Message);
         }
 
+        [HttpGet("detailsbycustomer")]
+        public IActionResult GetRentalByCustomer(int id)
+        {
+
+            var result = _rentalService.GetRentalDetailsById(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
     }
 }

@@ -4,6 +4,8 @@ using DataAccess.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Core.Utilities.Results.Abstract;
+using Core.Utilities.Results.Concrete;
 
 namespace Business.Concrete
 {
@@ -16,19 +18,42 @@ namespace Business.Concrete
             _userDAL = userDAL;
         }
 
-        public List<OperationClaim> GetClaims(User user)
+        public IDataResult<User> GetById(int userId)
         {
-            return _userDAL.GetClaims(user);
+            return new SuccessDataResult<User>(_userDAL.Get(u => u.Id == userId));
         }
 
-        public void Add(User user)
+        public IDataResult<List<OperationClaim>> GetClaims(User user)
+        {
+            return new SuccessDataResult<List<OperationClaim>>(_userDAL.GetClaims(user));
+        }
+
+        public IResult Add(User user)
         {
             _userDAL.Add(user);
+            return new SuccessResult();
         }
 
-        public User GetByMail(string email)
+        public IResult Update(User user)
         {
-            return _userDAL.Get(u => u.Email == email);
+            _userDAL.Update(user);
+            return new SuccessResult();
+        }
+
+        public IResult Delete(User user)
+        {
+            _userDAL.Delete(user);
+            return new SuccessResult();
+        }
+
+        public IDataResult<List<User>> GetAll()
+        {
+            return new SuccessDataResult<List<User>>(_userDAL.GetAll());
+        }
+
+        public IDataResult<User> GetByMail(string email)
+        {
+            return new SuccessDataResult<User>(_userDAL.Get(u => u.Email == email));
         }
     }
 }

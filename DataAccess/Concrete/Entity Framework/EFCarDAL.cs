@@ -27,21 +27,19 @@ namespace DataAccess.Concrete.Entity_Framework
 
                              join brand in context.Brands
                                  on car.BrandId equals brand.BrandId
-
-                             //join carImage in context.CarImages
-                             //    on car.Id equals carImage.CarId
+                        
 
                              select new CarDetailDto()
                              {
                                  Id = car.Id,
-                                 //ImagePath = carImage.ImagePath,
                                  Description = car.Description,
                                  BrandId = brand.BrandId,
                                  BrandName = brand.Name,
                                  ColorId = color.ColorId,
                                  ColorName = color.Name,
                                  DailyPrice = car.DailyPrice,
-                                 ModelYear = car.ModelYear
+                                 ModelYear = car.ModelYear,
+                                 Status = !context.Rentals.Any(r=>r.CarID == car.Id && r.ReturnDate == null)
                              };
 
                 return filter == null

@@ -15,19 +15,24 @@ namespace DataAccess.Concrete.Entity_Framework
 {
     public class EFRentalDAL : EFEntityRepositoryBase<Rental, ReCapDbContext>, IRentalDAL
     {
-        public List<RentalDetailDto> GetRentalDetails()
+        public List<RentalDetailDto> GetRentalDetails(Expression<Func<RentalDetailDto, bool>> filter = null)
         {
             using (ReCapDbContext context = new ReCapDbContext())
             {
                 var result = from rental in context.Rentals
+
                              join car in context.Cars
                              on rental.CarID equals car.Id
+
                              join customer in context.Customers
                              on rental.CustomerID equals customer.Id
+
                              join brand in context.Brands
                              on car.BrandId equals brand.BrandId
+
                              join user in context.Users
                              on customer.UserId equals user.Id
+
                              select new RentalDetailDto
                              {
                                  Id = rental.Id,
@@ -38,7 +43,7 @@ namespace DataAccess.Concrete.Entity_Framework
                                  ReturnDate = rental.ReturnDate
                              };
 
-                return result.ToList();
+                return result.GroupBy(p => p.Id).Select(p => p.FirstOrDefault()).ToList();
             }
         }
     }
