@@ -16,12 +16,10 @@ namespace WebAPI.Controllers
     public class RentalsController : ControllerBase
     {
         IRentalService _rentalService;
-        IPaymentService _paymentService;
 
-        public RentalsController(IRentalService rentalService,IPaymentService paymentService)
+        public RentalsController(IRentalService rentalService)
         {
             _rentalService = rentalService;
-            _paymentService = paymentService;
         }
 
         [HttpPost("add")]
