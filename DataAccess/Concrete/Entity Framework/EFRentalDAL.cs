@@ -57,5 +57,45 @@ namespace DataAccess.Concrete.Entity_Framework
                     : result.Where(filter).ToList();
             }
         }
+
+        public RentalDetailDto GetRentalDetails(int id)
+        {
+            using (ReCapDbContext context = new ReCapDbContext())
+            {
+                var result = from rental in context.Rentals.Where(r => r.Id == id)
+
+                    join car in context.Cars
+                        on rental.CarID equals car.Id
+
+                    join customer in context.Customers
+                        on rental.CustomerID equals customer.Id
+
+                    join brand in context.Brands
+                        on car.BrandId equals brand.BrandId
+
+                    join color in context.Colors
+                        on car.ColorId equals color.ColorId
+
+                    join user in context.Users
+                        on customer.UserId equals user.Id
+
+                        select new RentalDetailDto
+                    {
+                        Id = rental.Id,
+                        CarId = car.Id,
+                        BrandName = brand.Name,
+                        ColorName = color.Name,
+                        CompanyName = customer.CompanyName,
+                        UserName = user.FirstName + " " + user.LastName,
+                        Description = car.Description,
+                        ModelYear = car.ModelYear,
+                        RentDate = rental.RentDate,
+                        DailyPrice = car.DailyPrice,
+                        ReturnDate = rental.ReturnDate
+                    };
+
+                return result.SingleOrDefault();
+            }
+        }
     }
 }

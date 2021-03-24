@@ -22,7 +22,7 @@ namespace WebAPI.Controllers
 
         //for test
 
-        [HttpGet("makepayment")]
+        [HttpGet("payment")]
         public IActionResult MakePayment(Payment payment) 
         {
             var result = _paymentService.MakePayment(payment);

@@ -74,30 +74,41 @@ namespace Business.Concrete
         [CacheAspect]
         public IDataResult<List<CarDetailDto>> GetByBrand(int brandId)
         {
-            return new SuccessDataResult<List<CarDetailDto>>(_carDAL.GetCarDetails(c => c.BrandId == brandId));
+            return new SuccessDataResult<List<CarDetailDto>>(_carDAL.GetCarsDetails(c => c.BrandId == brandId));
         }
 
         [CacheAspect]
         public IDataResult<List<CarDetailDto>> GetByColor(int colorId)
         {
-            return new SuccessDataResult<List<CarDetailDto>>(_carDAL.GetCarDetails(c => c.ColorId == colorId));
+            return new SuccessDataResult<List<CarDetailDto>>(_carDAL.GetCarsDetails(c => c.ColorId == colorId));
         }
 
         [CacheAspect]
-        public IDataResult<List<CarDetailDto>> GetCarDetails()
+        public IDataResult<List<CarDetailDto>> GetCarsDetails()
         {
-            return new SuccessDataResult<List<CarDetailDto>>(_carDAL.GetCarDetails());
+            return new SuccessDataResult<List<CarDetailDto>>(_carDAL.GetCarsDetails());
         }
 
         [CacheAspect]
-        public IDataResult<List<CarDetailDto>> GetCarDetail(int carId)
+        public IDataResult<CarDetailDto> GetCarDetails(int carId)
         {
-            return new SuccessDataResult<List<CarDetailDto>>(_carDAL.GetCarDetails(c => c.Id == carId));
+            return new SuccessDataResult<CarDetailDto>(_carDAL.GetCarDetails(carId));
         }
 
-        public IDataResult<List<CarDetailDto>> GetCarDetailsByBrandAndColor(int brandId, int colorId)
+        public IDataResult<List<CarDetailDto>> GetCarsByBrandAndColor(int brandId, int colorId)
         {
-            return new SuccessDataResult<List<CarDetailDto>>(_carDAL.GetCarDetails(c => c.ColorId == colorId & c.BrandId == brandId));
+            List<CarDetailDto> car= (_carDAL.GetCarsDetails(c => c.ColorId == colorId & c.BrandId == brandId));
+            if (car==null)
+            {
+                return new ErrorDataResult<List<CarDetailDto>>();
+            }
+            return new SuccessDataResult<List<CarDetailDto>>(car);
+
+        }
+
+        public IResult AddTransactionTest(Car entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

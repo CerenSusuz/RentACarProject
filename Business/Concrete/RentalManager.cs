@@ -28,10 +28,16 @@ namespace Business.Concrete
         }
 
         [CacheRemoveAspect("IRentalService.Get")]
-        [SecuredOperation("rental.add,admin")]
+        //[SecuredOperation("rental.add,admin")]
         [ValidationAspect(typeof(RentalValidator))]
         public IResult Add(Rental rental)
         {
+            var result = BusinessRules.Run(CheckCarAvailable(rental.CarID));
+
+            if (result != null)
+            {
+                return result;
+            }
             _rentalDAL.Add(rental);
             return new SuccessResult();
         }
@@ -72,34 +78,21 @@ namespace Business.Concrete
         }
 
         [CacheAspect]
-        public IDataResult<List<RentalDetailDto>> GetRentalDetailsById(int id)
+        public IDataResult<RentalDetailDto> GetRentalDetailsById(int id)
         {
-            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDAL.GetRentalDetails(c => c.Id == id));
+            return new SuccessDataResult<RentalDetailDto>(_rentalDAL.GetRentalDetails(id));
         }
 
-        public IDataResult<List<RentalDetailDto>> GetAllUndeliveredRentalDetails()
+        private IResult CheckCarAvailable(int carId)
         {
-            List<RentalDetailDto> rentalDetailDtos = _rentalDAL.GetRentalDetails(p => p.ReturnDate == null);
-            if (rentalDetailDtos.Count > 0)
+            if (_rentalDAL.Get(r => r.CarID == carId && r.ReturnDate == null) != null)
             {
-                return new SuccessDataResult<List<RentalDetailDto>>(rentalDetailDtos);
+                return new ErrorResult();
             }
-
-            return new ErrorDataResult<List<RentalDetailDto>>();
-
+            return new SuccessResult();
         }
 
-        public IDataResult<List<RentalDetailDto>> GetAllDeliveredRentalDetails()
-        {
-            List<RentalDetailDto> rentalDetailDtos = _rentalDAL.GetRentalDetails(p => p.ReturnDate != null);
-            if (rentalDetailDtos.Count > 0)
-            {
-                return new SuccessDataResult<List<RentalDetailDto>>(rentalDetailDtos);
-            }
-            return new ErrorDataResult<List<RentalDetailDto>>();
 
-
-        }
     }
 }
 

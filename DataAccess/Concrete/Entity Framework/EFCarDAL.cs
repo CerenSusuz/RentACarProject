@@ -1,5 +1,4 @@
 ﻿using Core.DataAccess.EntityFramework;
-using Core.Utilities.Results.Abstract;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -16,11 +15,11 @@ namespace DataAccess.Concrete.Entity_Framework
 {
     public class EFCarDAL : EFEntityRepositoryBase<Car, ReCapDbContext>, ICarDAL
     {
-        public List<CarDetailDto> GetCarDetails(Expression<Func<CarDetailDto, bool>> filter = null)
+        public List<CarDetailDto> GetCarsDetails(Expression<Func<CarDetailDto, bool>> filter = null)
         {
             using (ReCapDbContext context = new ReCapDbContext())
             {
-                var result = from car in context.Cars
+                var result = from car in context.Cars 
 
                              join color in context.Colors
                                  on car.ColorId equals color.ColorId
@@ -42,11 +41,36 @@ namespace DataAccess.Concrete.Entity_Framework
                                  Status = !context.Rentals.Any(r=>r.CarID == car.Id && r.ReturnDate == null)
                              };
 
-                return filter == null
-                    ? result.ToList()
-                    : result.Where(filter).ToList();
+                return filter == null ? result.ToList() : result.Where(filter).ToList();
             }
         }
 
+        public CarDetailDto GetCarDetails(int carId)
+        {
+            using (ReCapDbContext context = new ReCapDbContext())
+            {
+                var result = from car in context.Cars.Where(c => c.Id == carId)
+
+                    join color in context.Colors
+                        on car.ColorId equals color.ColorId
+
+                    join brand in context.Brands
+                        on car.BrandId equals brand.BrandId
+
+                    select new CarDetailDto()
+                    {
+                        BrandId = brand.BrandId,
+                        ColorId = color.ColorId,
+                        BrandName = brand.Name,
+                        ColorName = color.Name,
+                        DailyPrice = car.DailyPrice,
+                        Description = car.Description,
+                        ModelYear = car.ModelYear,
+                        Id = car.Id,
+                        Status = !(context.Rentals.Any(r=>r.CarID == carId && r.ReturnDate == null))
+                    };
+                return result.SingleOrDefault();
+            }
+        }
     }
 }
