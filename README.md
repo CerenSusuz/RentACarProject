@@ -29,4 +29,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](https://gi
 
 [![Linkedin Badge](https://img.shields.io/badge/cerensusuz-follow%20on%20linkedin-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/ceren-s-2a70841b3/)
 
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
+[license-url]: https://github.com/CerenSusuz/RentACarProject/blob/main/LICENSE.md
