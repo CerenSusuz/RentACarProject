@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Entities.DTOs;
+using Business.BusinessAspect.Autofac;
 
 namespace Business.Concrete
 {
@@ -29,6 +30,7 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
+        [SecuredOperation("customers.add,admin")]
         [CacheRemoveAspect("ICustomerService.Get")]
         [ValidationAspect(typeof(CustomerValidator))]
         public IResult Delete(Customer customer)

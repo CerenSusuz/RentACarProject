@@ -95,17 +95,18 @@ namespace Business.Concrete
             return new SuccessDataResult<CarDetailDto>(_carDAL.GetCarDetails(carId));
         }
 
+        [CacheAspect]
         public IDataResult<List<CarDetailDto>> GetCarsByBrandAndColor(int brandId, int colorId)
         {
-            List<CarDetailDto> car= (_carDAL.GetCarsDetails(c => c.ColorId == colorId & c.BrandId == brandId));
-            if (car==null)
+            List<CarDetailDto> car =(_carDAL.GetCarsDetails(c => c.BrandId == brandId && c.ColorId == colorId ));
+            if (car == null)
             {
                 return new ErrorDataResult<List<CarDetailDto>>();
             }
-            return new SuccessDataResult<List<CarDetailDto>>(car);
+            return new SuccessDataResult<List<CarDetailDto>>(car);  
 
         }
-
+        
         public IResult AddTransactionTest(Car entity)
         {
             throw new NotImplementedException();
