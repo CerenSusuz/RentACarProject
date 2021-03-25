@@ -23,7 +23,7 @@ RENTACAR is a car rental project with a secure system where you can apply CRUD t
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/CerenSusuz/NorthwindProject/blob/main/LICENSE) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](license-url) file for details
 
 ## 📫 How to Reach Me
 
