@@ -103,24 +103,23 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("payment")]
-        public ActionResult PaymentAdd(RentalPaymentDto payment)
+        [HttpPost("pay")]
+        public ActionResult PaymentAdd(PaymentTest payment)
         {
-            var paymentResult = _paymentService.MakePayment(payment.Payment);
-
-            if (!paymentResult.Success)
+            //testing
+            var paymentResult = _paymentService.MakePayment(payment);
+            if (paymentResult.Success)
             {
-                return BadRequest(paymentResult.Message);
+                //add rental table
+                var result = _rentalService.Add(payment.Rental);
+                if (result.Success)
+                {
+                    return Ok(result);
+                }
             }
+            return BadRequest(paymentResult.Message);
 
-            var result = _rentalService.Add(payment.Rental);
 
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result.Message);                    
-            
         }
 
 

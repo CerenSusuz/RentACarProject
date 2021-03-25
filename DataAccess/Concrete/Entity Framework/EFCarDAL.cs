@@ -26,7 +26,7 @@ namespace DataAccess.Concrete.Entity_Framework
 
                              join brand in context.Brands
                                  on car.BrandId equals brand.BrandId
-                        
+                       
 
                              select new CarDetailDto()
                              {
@@ -37,8 +37,7 @@ namespace DataAccess.Concrete.Entity_Framework
                                  ColorId = color.ColorId,
                                  ColorName = color.Name,
                                  DailyPrice = car.DailyPrice,
-                                 ModelYear = car.ModelYear,
-                                 Status = !context.Rentals.Any(r=>r.CarID == car.Id && r.ReturnDate == null)
+                                 ModelYear = car.ModelYear
                              };
 
                 return filter == null ? result.ToList() : result.Where(filter).ToList();
@@ -51,24 +50,24 @@ namespace DataAccess.Concrete.Entity_Framework
             {
                 var result = from car in context.Cars.Where(c => c.Id == carId)
 
-                    join color in context.Colors
-                        on car.ColorId equals color.ColorId
+                             join color in context.Colors
+                                 on car.ColorId equals color.ColorId
 
-                    join brand in context.Brands
-                        on car.BrandId equals brand.BrandId
+                             join brand in context.Brands
+                                 on car.BrandId equals brand.BrandId
 
-                    select new CarDetailDto()
-                    {
-                        BrandId = brand.BrandId,
-                        ColorId = color.ColorId,
-                        BrandName = brand.Name,
-                        ColorName = color.Name,
-                        DailyPrice = car.DailyPrice,
-                        Description = car.Description,
-                        ModelYear = car.ModelYear,
-                        Id = car.Id,
-                        Status = !(context.Rentals.Any(r=>r.CarID == carId && r.ReturnDate == null))
-                    };
+                             select new CarDetailDto()
+                             {
+                                 BrandId = brand.BrandId,
+                                 ColorId = color.ColorId,
+                                 BrandName = brand.Name,
+                                 ColorName = color.Name,
+                                 DailyPrice = car.DailyPrice,
+                                 Description = car.Description,
+                                 ModelYear = car.ModelYear,
+                                 Id = car.Id
+                             };
+                       
                 return result.SingleOrDefault();
             }
         }

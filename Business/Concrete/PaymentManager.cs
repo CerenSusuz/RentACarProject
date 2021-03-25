@@ -7,11 +7,16 @@ namespace Business.Concrete
 {
     public class PaymentManager : IPaymentService
     {
-        public IResult MakePayment(Payment payment)
+        //testing
+
+        public IResult MakePayment(PaymentTest payment)
         {
-            if (payment.Amount > 8000)
+            if (payment.Amount < 100)
             {
-                return new ErrorResult("test");
+                if (payment.SecurityCode == "111")
+                {
+                    return new ErrorResult("PaymentCardError");
+                }
             }
             return new SuccessResult();
         }
