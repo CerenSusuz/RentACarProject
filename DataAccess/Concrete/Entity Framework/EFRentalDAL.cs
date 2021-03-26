@@ -16,7 +16,7 @@ namespace DataAccess.Concrete.Entity_Framework
 {
     public class EFRentalDAL : EFEntityRepositoryBase<Rental, ReCapDbContext>, IRentalDAL
     {
-        public List<RentalDetailDto> GetRentalDetails(Expression<Func<RentalDetailDto, bool>> filter = null)
+        public List<RentalDetailDto> GetRentalsDetails(Expression<Func<RentalDetailDto, bool>> filter = null)
         {
             using (ReCapDbContext context = new ReCapDbContext())
             {
@@ -40,7 +40,7 @@ namespace DataAccess.Concrete.Entity_Framework
                              select new RentalDetailDto
                              {
                                  Id = rental.Id,
-                                 CarId = car.Id,
+                                 CarID = car.Id,
                                  BrandName = brand.Name,
                                  ColorName = color.Name,
                                  CompanyName = customer.CompanyName,
@@ -82,7 +82,7 @@ namespace DataAccess.Concrete.Entity_Framework
                         select new RentalDetailDto
                     {
                         Id = rental.Id,
-                        CarId = car.Id,
+                        CarID = car.Id,
                         BrandName = brand.Name,
                         ColorName = color.Name,
                         CompanyName = customer.CompanyName,

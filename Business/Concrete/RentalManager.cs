@@ -28,14 +28,14 @@ namespace Business.Concrete
         }
 
         [CacheRemoveAspect("IRentalService.Get")]
-        [SecuredOperation("rental.add,admin,user")]
+        //[SecuredOperation("rental.add,admin,user")]
         [ValidationAspect(typeof(RentalValidator))]
         public IResult Add(Rental rental)
         {
-            var result = BusinessRules.Run(CheckCarAvailable(rental.Id), CheckDateAvailable(rental));
+            var result = BusinessRules.Run(CheckCarAvailable(rental));
             if (result != null)
             {
-                return result; // error message
+               return result;
             }
             _rentalDAL.Add(rental);
             return new SuccessResult();
@@ -71,9 +71,9 @@ namespace Business.Concrete
         }
 
         [CacheAspect]
-        public IDataResult<List<RentalDetailDto>> GetRentalDetails()
+        public IDataResult<List<RentalDetailDto>> GetRentalsDetails()
         {
-            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDAL.GetRentalDetails());
+            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDAL.GetRentalsDetails());
         }
 
         [CacheAspect]
@@ -82,20 +82,13 @@ namespace Business.Concrete
             return new SuccessDataResult<RentalDetailDto>(_rentalDAL.GetRentalDetails(id));
         }
 
-        private IResult CheckDateAvailable(Rental rental)
-        {
-            if (_rentalDAL.Get(r => r.ReturnDate == null && r.ReturnDate.Value > rental.RentDate.Value) != null)
-            {
-                return new ErrorResult(Messages.NotAvailableCar);
-            }
-            return new SuccessResult();
-        }
 
-        private IResult CheckCarAvailable(int id)
+        private IResult CheckCarAvailable(Rental rental)
         {
-            if (_rentalDAL.Get(r => r.CarID == id) != null)
+            var result = _rentalDAL.Get(r => r.CarID == rental.CarID && (r.ReturnDate == null || r.ReturnDate >= rental.RentDate));
+            if (result != null)
             {
-                return new ErrorResult(Messages.CarDateCheck);
+                return new ErrorResult(Messages.CarAvailable);
             }
             return new SuccessResult();
         }

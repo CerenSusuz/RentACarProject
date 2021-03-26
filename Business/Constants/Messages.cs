@@ -7,7 +7,7 @@ namespace Business.Constants
 {
     public static class Messages
     {
-        public static string CarDateCheck = " Check date on the list because there is a car with this id";
+        public static string CarAvailable = "NOT available";
         public static string MaintenanceTime = "System is under maintenance";
         public static string CarImageLimitExceeded = "More than 5 images cannot be added";
         

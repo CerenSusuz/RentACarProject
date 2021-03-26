@@ -83,7 +83,7 @@ namespace WebAPI.Controllers
         public IActionResult GetRentalDetails()
         {
             //Thread.Sleep(2000);
-            var result = _rentalService.GetRentalDetails();
+            var result = _rentalService.GetRentalsDetails();
             if (result.Success)
             {
                 return Ok(result);
