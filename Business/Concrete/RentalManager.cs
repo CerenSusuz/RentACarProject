@@ -49,7 +49,7 @@ namespace Business.Concrete
         }
 
         [CacheRemoveAspect("IRentalService.Get")]
-        [SecuredOperation("rental.delete,admin")]
+        //[SecuredOperation("rental.delete,admin")]
         public IResult Delete(Rental rental)
         {
             _rentalDAL.Delete(rental);
@@ -57,7 +57,7 @@ namespace Business.Concrete
         }
 
         [CacheRemoveAspect("IRentalService.Get")]
-        [SecuredOperation("rental.update,admin")]
+        //[SecuredOperation("rental.update,admin")]
         [ValidationAspect(typeof(RentalValidator))]
         public IResult Update(Rental rental)
         {
@@ -93,9 +93,7 @@ namespace Business.Concrete
         {
             var result =
                 _rentalDAL.Get(r => (r.CarID == rental.CarID && r.ReturnDate == null) 
-            || (r.RentEndDate >= rental.RentBeginDate && r.RentBeginDate >= rental.RentBeginDate)
-            || (r.RentEndDate >= rental.RentEndDate && r.RentBeginDate >= rental.RentEndDate)
-            || (r.RentBeginDate >= rental.RentBeginDate && r.RentEndDate >= rental.RentEndDate));
+            || (r.RentDate >= rental.RentDate && r.ReturnDate >= rental.RentDate));
 
             if (result != null)
             {

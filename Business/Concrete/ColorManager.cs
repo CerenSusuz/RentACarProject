@@ -31,7 +31,7 @@ namespace Business.Concrete
         }
 
         [CacheRemoveAspect("IColorService.Get")]
-        [SecuredOperation("color.delete,admin")]
+        //[SecuredOperation("color.delete,admin")]
         public IResult Delete(Color color)
         {
             _colorDAL.Delete(color);
@@ -40,7 +40,7 @@ namespace Business.Concrete
 
         [ValidationAspect(typeof(ColorValidator))]
         [CacheRemoveAspect("IColorService.Get")]
-        [SecuredOperation("color.update,admin")]
+        //[SecuredOperation("color.update,admin")]
         public IResult Update(Color color)
         {
             _colorDAL.Update(color);

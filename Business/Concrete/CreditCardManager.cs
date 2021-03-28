@@ -5,6 +5,7 @@ using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System.Collections.Generic;
+using Core.Aspects.Autofac.Caching;
 using Core.Utilities.Business;
 
 namespace Business.Concrete
@@ -17,6 +18,9 @@ namespace Business.Concrete
         {
             _creditCardDAL = creditCardDAL;
         }
+
+        //[SecuredOperation("admin,user")]
+        [CacheRemoveAspect("ICreditCardService.Get")]
         public IResult Add(CreditCard creditCard)
         {
             IResult result = BusinessRules.Run(IsCardExist(creditCard));
@@ -28,20 +32,32 @@ namespace Business.Concrete
             _creditCardDAL.Add(creditCard);
             return new SuccessResult();
         }
+       
+        //[SecuredOperation("admin,user")]
+        [CacheRemoveAspect("ICreditCardService.Get")]
         public IResult Delete(CreditCard creditCard)
         {
             _creditCardDAL.Delete(creditCard);
             return new SuccessResult();
         }
+
+        //[SecuredOperation("admin,user")]
+        [CacheRemoveAspect("ICreditCardService.Get")]
         public IResult Update(CreditCard creditCard)
         {
             _creditCardDAL.Update(creditCard);
             return new SuccessResult();
         }
+
+        //[SecuredOperation("admin")]
+        [CacheAspect]
         public IDataResult<List<CreditCard>> GetAll()
         {
             return new SuccessDataResult<List<CreditCard>>(_creditCardDAL.GetAll());
         }
+
+        //[SecuredOperation("admin,user")]
+        [CacheAspect]
         public IDataResult<List<CreditCard>> GetByCustomer(int id)
         {
             return new SuccessDataResult<List<CreditCard>>(_creditCardDAL.GetAll(c=>c.CustomerId==id));

@@ -33,7 +33,7 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        [SecuredOperation("car.delete,admin")]
+        //[SecuredOperation("car.delete,admin")]
         [CacheRemoveAspect("ICarService.Get")]
         public IResult Delete(Car car)
         {
@@ -41,7 +41,7 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        [SecuredOperation("car.update,admin")]
+        //[SecuredOperation("car.update,admin")]
         [CacheRemoveAspect("ICarService.Get")]
         public IResult Update(Car car)
         {
