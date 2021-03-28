@@ -4,14 +4,16 @@ using DataAccess.Concrete.Entity_Framework.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ReCapDbContext))]
-    partial class ReCapDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210328114649_ccTable")]
+    partial class ccTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -116,9 +118,6 @@ namespace DataAccess.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MinFindexScore")
-                        .HasColumnType("int");
-
                     b.Property<int>("ModelYear")
                         .HasColumnType("int");
 
@@ -199,9 +198,6 @@ namespace DataAccess.Migrations
 
                     b.Property<string>("CompanyName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("FindexScore")
-                        .HasColumnType("int");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");

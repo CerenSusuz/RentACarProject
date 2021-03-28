@@ -22,11 +22,10 @@ namespace DataAccess.Concrete.Entity_Framework
                 var result = from car in context.Cars 
 
                              join color in context.Colors
-                                 on car.ColorId equals color.ColorId
+                             on car.ColorId equals color.ColorId
 
                              join brand in context.Brands
-                                 on car.BrandId equals brand.BrandId
-                       
+                             on car.BrandId equals brand.BrandId                   
 
                              select new CarDetailDto()
                              {
@@ -51,10 +50,10 @@ namespace DataAccess.Concrete.Entity_Framework
                 var result = from car in context.Cars.Where(c => c.Id == carId)
 
                              join color in context.Colors
-                                 on car.ColorId equals color.ColorId
+                             on car.ColorId equals color.ColorId
 
                              join brand in context.Brands
-                                 on car.BrandId equals brand.BrandId
+                             on car.BrandId equals brand.BrandId
 
                              select new CarDetailDto()
                              {

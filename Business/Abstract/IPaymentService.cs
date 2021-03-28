@@ -10,6 +10,6 @@ namespace Business.Abstract
 {
     public interface IPaymentService
     {
-        IResult MakePayment(PaymentTest payment);
+        IResult MakePayment(Payment payment);
     }
 }

@@ -10,6 +10,7 @@ using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Entities.DTOs;
 
@@ -30,7 +31,6 @@ namespace Business.Concrete
         {
             _carDAL.Add(car);
             return new SuccessResult();
-
         }
 
         [SecuredOperation("car.delete,admin")]
@@ -84,7 +84,7 @@ namespace Business.Concrete
         }
 
         [CacheAspect]
-        public IDataResult<List<CarDetailDto>> GetCarsDetails()
+        public IDataResult<List<CarDetailDto>> GetCarsWithDetails()
         {
             return new SuccessDataResult<List<CarDetailDto>>(_carDAL.GetCarsDetails());
         }
@@ -98,18 +98,16 @@ namespace Business.Concrete
         [CacheAspect]
         public IDataResult<List<CarDetailDto>> GetCarsByBrandAndColor(int brandId, int colorId)
         {
-            List<CarDetailDto> car =(_carDAL.GetCarsDetails(c => c.BrandId == brandId && c.ColorId == colorId ));
+            List<CarDetailDto> car = (_carDAL.GetCarsDetails(c => c.BrandId == brandId && c.ColorId == colorId ));
+
             if (car == null)
             {
-                return new ErrorDataResult<List<CarDetailDto>>();
+                return new ErrorDataResult<List<CarDetailDto>>(Messages.NoCar);
             }
+
             return new SuccessDataResult<List<CarDetailDto>>(car);  
 
         }
-        
-        public IResult AddTransactionTest(Car entity)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

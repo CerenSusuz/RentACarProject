@@ -133,7 +133,7 @@ namespace Business.Concrete
             }
             return new SuccessDataResult<List<CarImage>>(_carImageDAL.GetAll(c => c.CarId == id));
         }
-        
+
     }
 }
 

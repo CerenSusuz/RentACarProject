@@ -35,7 +35,7 @@ namespace WebAPI.Controllers
             return BadRequest(result.Message);
         }
 
-        [HttpDelete("delete")]
+        [HttpPost("delete")]
         public IActionResult Delete(Rental rental)
         {
             var result = _rentalService.Delete(rental);
@@ -46,7 +46,7 @@ namespace WebAPI.Controllers
             return BadRequest(result.Message);
         }
 
-        [HttpPut("update")]
+        [HttpPost("update")]
         public IActionResult Update(Rental Rental)
         {
             var result = _rentalService.Update(Rental);
@@ -60,7 +60,7 @@ namespace WebAPI.Controllers
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            var result = _rentalService.GetRentals();
+            var result = _rentalService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
@@ -103,11 +103,12 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("pay")]
-        public ActionResult PaymentAdd(PaymentTest payment)
+        [HttpPost("payment")]
+        public IActionResult PaymentAdd(Payment payment)
         {
             //testing
             var paymentResult = _paymentService.MakePayment(payment);
+
             if (paymentResult.Success)
             {
                 //add rental table
@@ -117,7 +118,7 @@ namespace WebAPI.Controllers
                     return Ok(result);
                 }
             }
-            return BadRequest(paymentResult.Message);
+            return BadRequest();
 
 
         }

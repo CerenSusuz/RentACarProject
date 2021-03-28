@@ -111,8 +111,7 @@ namespace WebAPI.Controllers
         [HttpGet("getcardetails")]
         public IActionResult GetCarDetails()
         {
-            //Thread.Sleep(2000);
-            var result = _carService.GetCarsDetails();
+            var result = _carService.GetCarsWithDetails();
             if (result.Success)
             {
                 return Ok(result);
