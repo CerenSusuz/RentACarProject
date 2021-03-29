@@ -28,12 +28,6 @@ namespace DataAccess.Concrete.Entity_Framework
                              join customer in context.Customers
                              on rental.CustomerID equals customer.Id
 
-                             join brand in context.Brands
-                             on car.BrandId equals brand.BrandId
-
-                             join color in context.Colors
-                             on car.ColorId equals color.ColorId
-
                              join user in context.Users
                              on customer.UserId equals user.Id
 
@@ -41,20 +35,13 @@ namespace DataAccess.Concrete.Entity_Framework
                              {
                                  Id = rental.Id,
                                  CarID = car.Id,
-                                 BrandName = brand.Name,
-                                 ColorName = color.Name,
-                                 CompanyName = customer.CompanyName,
                                  UserName = user.FirstName + " " + user.LastName,
-                                 Description = car.Description,
-                                 ModelYear = car.ModelYear,
+                                 CompanyName = customer.CompanyName,
                                  RentDate = rental.RentDate,
-                                 DailyPrice = car.DailyPrice,
                                  ReturnDate = rental.ReturnDate
                              };
 
-                return filter == null
-                    ? result.ToList()
-                    : result.Where(filter).ToList();
+                return filter == null ? result.ToList() : result.Where(filter).ToList();
             }
         }
 
@@ -70,12 +57,6 @@ namespace DataAccess.Concrete.Entity_Framework
                     join customer in context.Customers
                         on rental.CustomerID equals customer.Id
 
-                    join brand in context.Brands
-                        on car.BrandId equals brand.BrandId
-
-                    join color in context.Colors
-                        on car.ColorId equals color.ColorId
-
                     join user in context.Users
                         on customer.UserId equals user.Id
 
@@ -83,14 +64,9 @@ namespace DataAccess.Concrete.Entity_Framework
                     {
                         Id = rental.Id,
                         CarID = car.Id,
-                        BrandName = brand.Name,
-                        ColorName = color.Name,
-                        CompanyName = customer.CompanyName,
                         UserName = user.FirstName + " " + user.LastName,
-                        Description = car.Description,
-                        ModelYear = car.ModelYear,
+                        CompanyName = customer.CompanyName,
                         RentDate = rental.RentDate,
-                        DailyPrice = car.DailyPrice,
                         ReturnDate = rental.ReturnDate
                     };
 

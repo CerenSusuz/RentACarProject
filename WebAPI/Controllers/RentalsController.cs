@@ -97,7 +97,6 @@ namespace WebAPI.Controllers
         [HttpGet("getrentaldetails")]
         public IActionResult GetRentalDetails()
         {
-            //Thread.Sleep(2000);
             var result = _rentalService.GetRentalsDetails();
             if (result.Success)
             {
@@ -117,9 +116,6 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-
-
-
-
+        
     }
 }
