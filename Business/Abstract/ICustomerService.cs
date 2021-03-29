@@ -15,6 +15,5 @@ namespace Business.Abstract
         IDataResult<List<Customer>> GetCustomers();
         IDataResult<Customer> GetById(int id);
         IDataResult<List<CustomerDetailDto>> GetCustomerDetails();
-        IDataResult<int> CalculateScore(int id);
     }
 }

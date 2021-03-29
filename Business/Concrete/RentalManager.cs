@@ -22,13 +22,13 @@ namespace Business.Concrete
     {
         IRentalDAL _rentalDAL;
         ICarDAL _carDAL; 
-        ICustomerService _customerService;
+        ICustomerDAL _customerDAL;
 
-        public RentalManager(IRentalDAL rentalDAL, ICarDAL carDAL, ICustomerService customerService)
+        public RentalManager(IRentalDAL rentalDAL, ICarDAL carDAL, ICustomerDAL customerDAL)
         {
             _rentalDAL = rentalDAL;
             _carDAL = carDAL;
-            _customerService = customerService;
+            _customerDAL = customerDAL;
         }
 
         [CacheRemoveAspect("IRentalService.Get")]
@@ -107,10 +107,12 @@ namespace Business.Concrete
         {
             var car = _carDAL.Get(c => c.Id == carId);
 
-            var customerScore = _customerService.CalculateScore(customerId);
-            var carScore = car.MinFindexScore;
+            var customer = _customerDAL.Get(c => c.Id == customerId);
 
-            if (customerScore.Data >= carScore)
+            var carScore = car.MinFindexScore;
+            var customerScore = customer.FindexScore;
+
+            if (customerScore >= carScore)
             {
                 return new SuccessResult();
             }

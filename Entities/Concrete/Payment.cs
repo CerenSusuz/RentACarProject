@@ -8,6 +8,5 @@ namespace Entities.Concrete
     public class Payment : IEntity
     {
         public decimal Amount { get; set; }
-        public Rental Rental { get; set; }
     }
 }

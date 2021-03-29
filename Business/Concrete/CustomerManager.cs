@@ -17,11 +17,9 @@ namespace Business.Concrete
     public class CustomerManager : ICustomerService
     {
         ICustomerDAL _customerDAL; 
-        Random _random;
         public CustomerManager(ICustomerDAL customerDAL)
         {
             _customerDAL = customerDAL;
-            _random = new Random();
         }
 
         [CacheRemoveAspect("ICustomerService.Get")]
@@ -66,9 +64,5 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CustomerDetailDto>>(_customerDAL.GetCustomerDetailDto());
         }
 
-        public IDataResult<int> CalculateScore(int userId)
-        {
-            return new SuccessDataResult<int>(_random.Next(0, 1900));
-        }
     }
 }

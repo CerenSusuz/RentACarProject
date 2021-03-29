@@ -32,7 +32,22 @@ namespace WebAPI.Controllers
             {
                 return Ok(result);
             }
+
             return BadRequest(result.Message);
+
+        }
+
+        [HttpPost("payment")]
+        public IActionResult PaymentTest(Payment amount)
+        {
+            var result = _paymentService.MakePayment(amount);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result.Message);
+
         }
 
         [HttpPost("delete")]
@@ -103,25 +118,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("payment")]
-        public IActionResult PaymentAdd(Payment payment)
-        {
-            //testing
-            var paymentResult = _paymentService.MakePayment(payment);
 
-            if (paymentResult.Success)
-            {
-                //add rental table
-                var result = _rentalService.Add(payment.Rental);
-                if (result.Success)
-                {
-                    return Ok(result);
-                }
-            }
-            return BadRequest();
-
-
-        }
 
 
     }

@@ -8,7 +8,6 @@ namespace Business.Concrete
     public class PaymentManager : IPaymentService
     {
         //testing
-
         public IResult MakePayment(Payment payment)
         {
             if (payment.Amount < 100)
