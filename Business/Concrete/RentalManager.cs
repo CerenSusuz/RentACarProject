@@ -37,7 +37,7 @@ namespace Business.Concrete
         public IResult Add(Rental rental)
         {
             var result = BusinessRules.Run(CheckCarAvailable(rental),
-                CheckCreditScoreByCustomer(rental.CustomerID,rental.CarID));
+                CheckFindexScoreByCustomer(rental.CustomerID,rental.CarID));
 
             if (result != null)
             {
@@ -103,7 +103,7 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        private IResult CheckCreditScoreByCustomer(int customerId, int carId)
+        private IResult CheckFindexScoreByCustomer(int customerId, int carId)
         {
             var car = _carDAL.Get(c => c.Id == carId);
 

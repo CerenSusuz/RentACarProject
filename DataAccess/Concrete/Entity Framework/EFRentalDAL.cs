@@ -7,16 +7,18 @@ using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using DataAccess.Concrete.Entity_Framework.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.Entity_Framework
 {
     public class EFRentalDAL : EFEntityRepositoryBase<Rental, ReCapDbContext>, IRentalDAL
     {
-        public List<RentalDetailDto> GetRentalsDetails(Expression<Func<RentalDetailDto, bool>> filter = null)
+        public List<RentalDetailDto> GetRentalsDetails()
         {
             using (ReCapDbContext context = new ReCapDbContext())
             {
@@ -24,6 +26,9 @@ namespace DataAccess.Concrete.Entity_Framework
 
                              join car in context.Cars
                              on rental.CarID equals car.Id
+
+                             join brand in context.Brands
+                             on car.BrandId equals brand.BrandId
 
                              join customer in context.Customers
                              on rental.CustomerID equals customer.Id
@@ -35,13 +40,15 @@ namespace DataAccess.Concrete.Entity_Framework
                              {
                                  Id = rental.Id,
                                  CarID = car.Id,
+                                 BrandName = brand.Name,
                                  UserName = user.FirstName + " " + user.LastName,
                                  CompanyName = customer.CompanyName,
                                  RentDate = rental.RentDate,
                                  ReturnDate = rental.ReturnDate
                              };
-
-                return filter == null ? result.ToList() : result.Where(filter).ToList();
+                Debug.Write("asdfghjk--------"+result.ToList());
+                
+                return result.ToList();
             }
         }
 
@@ -54,7 +61,10 @@ namespace DataAccess.Concrete.Entity_Framework
                     join car in context.Cars
                         on rental.CarID equals car.Id
 
-                    join customer in context.Customers
+                    join brand in context.Brands
+                        on rental.BrandID equals brand.BrandId
+
+                             join customer in context.Customers
                         on rental.CustomerID equals customer.Id
 
                     join user in context.Users
@@ -64,6 +74,7 @@ namespace DataAccess.Concrete.Entity_Framework
                     {
                         Id = rental.Id,
                         CarID = car.Id,
+                        BrandName = brand.Name,
                         UserName = user.FirstName + " " + user.LastName,
                         CompanyName = customer.CompanyName,
                         RentDate = rental.RentDate,
