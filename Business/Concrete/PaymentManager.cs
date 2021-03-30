@@ -10,9 +10,9 @@ namespace Business.Concrete
         //testing
         public IResult MakePayment(Payment payment)
         {
-            if (payment.Amount < 100)
+            if (payment.Amount < 1000)
             {
-                return new ErrorResult("Payment Error");
+                return new ErrorResult("PAYMENT TEST ERROR");
             }
             return new SuccessResult();
         }
