@@ -16,16 +16,20 @@ namespace Business.Concrete
 {
     public class CustomerManager : ICustomerService
     {
-        ICustomerDAL _customerDAL; 
+        ICustomerDAL _customerDAL;
+         Random _random;
         public CustomerManager(ICustomerDAL customerDAL)
         {
             _customerDAL = customerDAL;
+            _random = new Random();
+
         }
 
         [CacheRemoveAspect("ICustomerService.Get")]
         [ValidationAspect(typeof(CustomerValidator))]
         public IResult Add(Customer customer)
         {
+            customer.FindexScore = _random.Next(0, 1900);
             _customerDAL.Add(customer);
             return new SuccessResult();
         }
