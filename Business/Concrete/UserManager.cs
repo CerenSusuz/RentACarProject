@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Text;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
+using Core.Utilities.Security.Hashing;
+using Entities.DTOs;
 
 namespace Business.Concrete
 {
@@ -34,9 +36,27 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        public IResult Update(User user)
+
+        public IResult Update(UserForUpdateDto user)
         {
-            _userDAL.Update(user);
+            byte[] passwordHash;
+            byte[] passwordSalt;
+
+            var userInfo = _userDAL.Get(u => u.Email == user.Email);
+
+            HashingHelper.CreatePasswordHash(user.Password,out passwordHash,out passwordSalt);
+
+            userInfo = new User()
+            {
+                Id = userInfo.Id,
+                FirstName = userInfo.FirstName,
+                LastName = userInfo.LastName,
+                PasswordHash = userInfo.PasswordHash,
+                PasswordSalt = userInfo.PasswordSalt,
+                Status = true
+            };
+
+            _userDAL.Update(userInfo);
             return new SuccessResult();
         }
 
