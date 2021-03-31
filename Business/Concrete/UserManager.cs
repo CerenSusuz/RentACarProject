@@ -36,23 +36,28 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
+        public IResult Update(User user)
+        {
+            _userDAL.Update(user);
+            return new SuccessResult();
 
-        public IResult Update(UserForUpdateDto user)
+        }
+
+        public IResult EditProfile(UserForUpdateDto user)
         {
             byte[] passwordHash;
             byte[] passwordSalt;
+            
+            HashingHelper.CreatePasswordHash(user.Password, out passwordHash,out passwordSalt);
 
-            var userInfo = _userDAL.Get(u => u.Email == user.Email);
-
-            HashingHelper.CreatePasswordHash(user.Password,out passwordHash,out passwordSalt);
-
-            userInfo = new User()
+            var userInfo = new User()
             {
-                Id = userInfo.Id,
-                FirstName = userInfo.FirstName,
-                LastName = userInfo.LastName,
-                PasswordHash = userInfo.PasswordHash,
-                PasswordSalt = userInfo.PasswordSalt,
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email= user.Email,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
                 Status = true
             };
 

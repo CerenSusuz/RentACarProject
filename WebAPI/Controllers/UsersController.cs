@@ -65,7 +65,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("update")]
-        public IActionResult Update(UserForUpdateDto user)
+        public IActionResult Update(User user)
         {
             var result = _userService.Update(user);
             if (result.Success)
@@ -86,7 +86,16 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-
+        [HttpPost("user/edit")]
+        public IActionResult EditProfile(UserForUpdateDto user)
+        {
+            var result = _userService.EditProfile(user);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
 
     }
 }

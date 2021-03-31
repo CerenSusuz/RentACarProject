@@ -32,7 +32,7 @@ namespace Business.Concrete
         }
 
         [CacheRemoveAspect("IRentalService.Get")]
-        [SecuredOperation("admin,user")]
+        //[SecuredOperation("rental.add,admin,user")]
         [ValidationAspect(typeof(RentalValidator))]
         public IResult Add(Rental rental)
         {
