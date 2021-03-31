@@ -25,6 +25,7 @@ namespace Business.Concrete
 
         }
 
+        [SecuredOperation("admin,user")]
         [CacheRemoveAspect("ICustomerService.Get")]
         [ValidationAspect(typeof(CustomerValidator))]
         public IResult Add(Customer customer)
@@ -43,6 +44,7 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
+        [SecuredOperation("admin,user")]
         [CacheRemoveAspect("ICustomerService.Get")]
         [ValidationAspect(typeof(CustomerValidator))]
         public IResult Update(Customer customer)

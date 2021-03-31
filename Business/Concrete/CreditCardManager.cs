@@ -5,6 +5,7 @@ using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System.Collections.Generic;
+using Business.BusinessAspect.Autofac;
 using Core.Aspects.Autofac.Caching;
 using Core.Utilities.Business;
 
@@ -19,7 +20,7 @@ namespace Business.Concrete
             _creditCardDAL = creditCardDAL;
         }
 
-        //[SecuredOperation("admin,user")]
+        [SecuredOperation("admin,user")]
         [CacheRemoveAspect("ICreditCardService.Get")]
         public IResult Add(CreditCard creditCard)
         {
@@ -33,7 +34,7 @@ namespace Business.Concrete
             return new SuccessResult();
         }
        
-        //[SecuredOperation("admin,user")]
+        [SecuredOperation("admin,user")]
         [CacheRemoveAspect("ICreditCardService.Get")]
         public IResult Delete(CreditCard creditCard)
         {
@@ -41,7 +42,7 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        //[SecuredOperation("admin,user")]
+        [SecuredOperation("admin,user")]
         [CacheRemoveAspect("ICreditCardService.Get")]
         public IResult Update(CreditCard creditCard)
         {
@@ -49,14 +50,14 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        //[SecuredOperation("admin")]
+        [SecuredOperation("admin")]
         [CacheAspect]
         public IDataResult<List<CreditCard>> GetAll()
         {
             return new SuccessDataResult<List<CreditCard>>(_creditCardDAL.GetAll());
         }
 
-        //[SecuredOperation("admin,user")]
+        [SecuredOperation("admin,user")]
         [CacheAspect]
         public IDataResult<List<CreditCard>> GetByCustomer(int id)
         {
