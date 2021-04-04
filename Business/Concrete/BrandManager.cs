@@ -24,7 +24,7 @@ namespace Business.Concrete
 
         [ValidationAspect(typeof(BrandValidator))]
         [CacheRemoveAspect("IBrandService.Get")]
-        //[SecuredOperation("brand.add,admin")]
+        [SecuredOperation("brand.add,admin")]
         public IResult Add(Brand brand)
         {
             _brandDAL.Add(brand);
@@ -32,7 +32,7 @@ namespace Business.Concrete
         }
 
         [CacheRemoveAspect("IBrandService.Get")]
-        //[SecuredOperation("brand.delete,admin")]
+        [SecuredOperation("brand.delete,admin")]
         public IResult Delete(Brand brand)
         {
             _brandDAL.Delete(brand);
@@ -41,7 +41,7 @@ namespace Business.Concrete
 
         [ValidationAspect(typeof(BrandValidator))]
         [CacheRemoveAspect("IBrandService.Get")]
-        //[SecuredOperation("brand.update,admin")]
+        [SecuredOperation("brand.update,admin")]
         public IResult Update(Brand brand)
         {
             _brandDAL.Update(brand);
